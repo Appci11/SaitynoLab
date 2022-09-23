@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SaitynoLab.Server.Dto;
+using SaitynoLab.Server.Services.UserService;
 using SaitynoLab.Shared;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,10 +17,20 @@ namespace SaitynoLab.Server.Controllers
     {
         public static User user = new User();
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
+        }
+
+        //pasitikrinimui ar GetMyName ar veikia
+        [HttpGet, Authorize]
+        public ActionResult<string> GetMe()
+        {
+            var userName = _userService.GetMyName();
+            return Ok(userName);
         }
 
         [HttpPost("register")]
@@ -37,11 +49,11 @@ namespace SaitynoLab.Server.Controllers
         public async Task<ActionResult<string>> Login(UserDto request)
         {
             //logika ir pasiemima vis tiek i services keliaus, tai meh...
-            if(user.Username != request.UserName)
+            if (user.Username != request.UserName)
             {
                 return BadRequest("User not found.");
             }
-            if(!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return BadRequest("Wrong Password.");
             }

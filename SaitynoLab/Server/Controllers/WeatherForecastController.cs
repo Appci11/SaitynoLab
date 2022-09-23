@@ -22,7 +22,7 @@ namespace SaitynoLab.Server.Controllers
         }
 
         //[HttpGet]
-        //automatiskai suteikia identiska, bet taip aiskiau
+        //automatiskai suteikia identiska Name, bet jei reiks keist...
         [HttpGet(Name = "GetWeatherForecast"), Authorize(Roles = "Admin")]
         public IEnumerable<WeatherForecast> Get()
         {

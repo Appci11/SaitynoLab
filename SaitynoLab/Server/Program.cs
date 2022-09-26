@@ -66,17 +66,30 @@ else
 }
 
 app.UseHttpsRedirection();
-
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
-
 app.UseRouting();
 
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapControllers();
+    endpoints.Map("api/{**slug}", HandleApiFallback);
+    endpoints.MapFallbackToFile("{**slug}", "index.html");
+});
+
+Task HandleApiFallback(HttpContext context)
+{
+    context.Response.StatusCode = StatusCodes.Status404NotFound;
+    return Task.CompletedTask;
+}
+
+//app.MapRazorPages();
 //Authentication visad pries Authorization
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+//app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
+

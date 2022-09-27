@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SaitynoLab.Server.Data;
 using SaitynoLab.Shared;
 
 namespace SaitynoLab.Server.Controllers
@@ -13,16 +15,28 @@ namespace SaitynoLab.Server.Controllers
             new SuperHero { Id = 1, FirstName = "Peter", LastName = "Parker", HeroName = "Spooderman" },
             new SuperHero { Id = 2, FirstName = "Bruce", LastName = "Wayne", HeroName = "Batman" }
         };
+        private readonly DataContext _context;
+
+        public SuperHeroController(DataContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetSuperHeroes()
         {
-            return Ok(heroes);
+            return base.Ok(await GetDbHeroes());
         }
+
+        private async Task<List<SuperHero>> GetDbHeroes()
+        {
+            return await _context.SuperHeroes.ToListAsync();
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSingleSuperHero(int id)
         {
-            var hero = heroes.FirstOrDefault(h => h.Id == id);
+            var hero = await _context.SuperHeroes.FirstOrDefaultAsync(h => h.Id == id);
             if (hero == null)
             {
                 return NotFound("Super Hero was not found.");
@@ -32,35 +46,40 @@ namespace SaitynoLab.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSuperHero(SuperHero hero)
         {
-            heroes.Add(hero);
-            return Ok(heroes);
+            _context.SuperHeroes.Add(hero);
+            await _context.SaveChangesAsync();
+            return Ok(await GetDbHeroes());
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSuperHero(SuperHero hero, int id)
         {
-            var dbHero = heroes.FirstOrDefault(h => h.Id == id);
+            var dbHero = await _context.SuperHeroes.FirstOrDefaultAsync(h => h.Id == id);
             if (dbHero == null)
             {
                 return NotFound("Super Hero was not found.");
             }
 
-            var index = heroes.IndexOf(dbHero);
-            heroes[index] = hero;
+            dbHero.FirstName = hero.FirstName;
+            dbHero.LastName = hero.LastName;
+            dbHero.HeroName = hero.HeroName;
 
-            return Ok(heroes);
+            await _context.SaveChangesAsync();
+
+            return Ok(await GetDbHeroes());
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSuperHero(int id)
         {
-            var dbHero = heroes.FirstOrDefault(h => h.Id == id);
+            var dbHero = await _context.SuperHeroes.FirstOrDefaultAsync(h => h.Id == id);
             if (dbHero == null)
             {
                 return NotFound("Super Hero was not found.");
             }
 
-            heroes.Remove(dbHero);
+            _context.SuperHeroes.Remove(dbHero);
+            await _context.SaveChangesAsync();
 
-            return Ok(heroes);
+            return Ok(await GetDbHeroes());
         }
     }
 }

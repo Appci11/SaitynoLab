@@ -11,7 +11,7 @@ using SaitynoLab.Server.Data;
 namespace SaitynoLab.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220926171603_Initial")]
+    [Migration("20220927124302_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,22 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SuperHeroes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Peter",
+                            HeroName = "Spooderman",
+                            LastName = "Parker"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Bruce",
+                            HeroName = "Batman",
+                            LastName = "Wayne"
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -22,6 +22,16 @@ namespace SaitynoLab.Server.Migrations
                 {
                     table.PrimaryKey("PK_SuperHeroes", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "SuperHeroes",
+                columns: new[] { "Id", "FirstName", "HeroName", "LastName" },
+                values: new object[] { 1, "Peter", "Spooderman", "Parker" });
+
+            migrationBuilder.InsertData(
+                table: "SuperHeroes",
+                columns: new[] { "Id", "FirstName", "HeroName", "LastName" },
+                values: new object[] { 2, "Bruce", "Batman", "Wayne" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

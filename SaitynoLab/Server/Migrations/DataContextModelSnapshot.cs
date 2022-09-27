@@ -44,6 +44,22 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SuperHeroes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Peter",
+                            HeroName = "Spooderman",
+                            LastName = "Parker"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Bruce",
+                            HeroName = "Batman",
+                            LastName = "Wayne"
+                        });
                 });
 #pragma warning restore 612, 618
         }

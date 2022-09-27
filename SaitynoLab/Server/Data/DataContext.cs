@@ -10,6 +10,14 @@ namespace SaitynoLab.Server.Data
 
         }
 
-        DbSet<SuperHero> SuperHeroes { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SuperHero>().HasData(
+                new SuperHero { Id = 1, FirstName = "Peter", LastName = "Parker", HeroName = "Spooderman" },
+                new SuperHero { Id = 2, FirstName = "Bruce", LastName = "Wayne", HeroName = "Batman" }
+            );
+        }
+
+        public DbSet<SuperHero> SuperHeroes { get; set; }
     }
 }

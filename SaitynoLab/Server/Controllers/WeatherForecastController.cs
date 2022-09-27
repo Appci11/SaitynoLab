@@ -4,8 +4,8 @@ using SaitynoLab.Shared;
 
 namespace SaitynoLab.Server.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    //[ApiController]
+    //[Route("[controller]")]
     // Arba Authorize cia visam controller, ir AllowAnonymous atskiriem endpoint
     public class WeatherForecastController : ControllerBase
     {

@@ -6,8 +6,8 @@ using SaitynoLab.Shared;
 
 namespace SaitynoLab.Server.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class SuperHeroController : ControllerBase
     {
         List<SuperHero> heroes = new List<SuperHero>
@@ -33,7 +33,7 @@ namespace SaitynoLab.Server.Controllers
             return await _context.SuperHeroes.ToListAsync();
         }
 
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
         public async Task<IActionResult> GetSingleSuperHero(int id)
         {
             var hero = await _context.SuperHeroes.FirstOrDefaultAsync(h => h.Id == id);
@@ -50,7 +50,7 @@ namespace SaitynoLab.Server.Controllers
             await _context.SaveChangesAsync();
             return Ok(await GetDbHeroes());
         }
-        [HttpPut("{id}")]
+        //[HttpPut("{id}")]
         public async Task<IActionResult> UpdateSuperHero(SuperHero hero, int id)
         {
             var dbHero = await _context.SuperHeroes.FirstOrDefaultAsync(h => h.Id == id);
@@ -67,7 +67,7 @@ namespace SaitynoLab.Server.Controllers
 
             return Ok(await GetDbHeroes());
         }
-        [HttpDelete("{id}")]
+        //[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSuperHero(int id)
         {
             var dbHero = await _context.SuperHeroes.FirstOrDefaultAsync(h => h.Id == id);

@@ -21,10 +21,10 @@ namespace SaitynoLab.Server.Data
                 new SuperHero { Id = 1, FirstName = "Peter", LastName = "Parker", HeroName = "Spooderman" },
                 new SuperHero { Id = 2, FirstName = "Bruce", LastName = "Wayne", HeroName = "Batman" }
             );
-            //modelBuilder.Entity<User>().HasData(
-            //    new User { Id = 1, Username = "User1" },
-            //    new User { Id = 2, Username = "User2" }
-            //);
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, Username = "User1" },
+                new User { Id = 2, Username = "User2" }
+            );
         }
 
         public DbSet<SuperHero> SuperHeroes { get; set; }

@@ -25,14 +25,19 @@ namespace SaitynoLab.Server.Controllers
             {
                 return Ok(response);
             }
-            else return NoContent();
+            else return NotFound();
 
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            return Ok(await _userService.GetUser(id));
+            User response = await _userService.GetUser(id);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            else return Ok(response);
         }
 
         [HttpPost]

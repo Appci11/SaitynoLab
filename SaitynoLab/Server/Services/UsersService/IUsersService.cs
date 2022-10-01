@@ -1,15 +1,15 @@
 ﻿using SaitynoLab.Server.Dto;
 using SaitynoLab.Shared;
 
-namespace SaitynoLab.Server.Services.UserService
+namespace SaitynoLab.Server.Services.UsersService
 {
-    public interface IUserService
+    public interface IUsersService
     {
         string GetMyName();
         Task<User> AddUser(User user);
         Task<List<User>> GetAllUsers();
         Task<User> GetUser(int id);
-        Task<User> UpdateUser(UserUpdateDto userUpdateDto);
+        Task<User> UpdateUser(int id, UserUpdateDto userUpdateDto);
         Task<User> DeleteUser(int id);
     }
 }

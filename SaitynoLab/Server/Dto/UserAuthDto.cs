@@ -1,6 +1,6 @@
 ﻿namespace SaitynoLab.Server.Dto
 {
-    public class UserDto
+    public class UserAuthDto
     {
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

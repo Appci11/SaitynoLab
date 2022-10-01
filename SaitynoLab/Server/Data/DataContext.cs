@@ -15,19 +15,46 @@ namespace SaitynoLab.Server.Data
 
         }
 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Furniture> Furniture { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SuperHero>().HasData(
-                new SuperHero { Id = 1, FirstName = "Peter", LastName = "Parker", HeroName = "Spooderman" },
-                new SuperHero { Id = 2, FirstName = "Bruce", LastName = "Wayne", HeroName = "Batman" }
-            );
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Username = "User1" },
                 new User { Id = 2, Username = "User2" }
             );
+            modelBuilder.Entity<SaitynoLab.Shared.Order>().HasData(
+                new Order
+                {
+                    Id = 1,
+                    BuyerId = 1,
+                    Email = "Pvz.pastas@kazkas.com",
+                    PhoneNumber = "867864264"
+                },
+                new Order
+                {
+                    Id = 2,
+                    BuyerId = 1,
+                    Email = "Pvz.pastas@kazkas.com",
+                    PhoneNumber = "867864264"
+                }
+            );
+            modelBuilder.Entity<Furniture>().HasData(
+                new Furniture
+                {
+                    Id = 1,
+                    Name = "Stalas1",
+                    OrderId = 1
+                },
+                new Furniture
+                {
+                    Id = 2,
+                    Name = "Stalas2",
+                    OrderId = 1
+                }
+            );
         }
-
-        public DbSet<SuperHero> SuperHeroes { get; set; }
-        public DbSet<User> Users { get; set; }
     }
 }

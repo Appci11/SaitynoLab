@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SaitynoLab.Server.Dto;
-using SaitynoLab.Server.Services.UserService;
+using SaitynoLab.Server.Services.UsersService;
 using SaitynoLab.Shared;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -17,9 +17,9 @@ namespace SaitynoLab.Server.Controllers
     {
         public static User user = new User();
         private readonly IConfiguration _configuration;
-        private readonly IUserService _userService;
+        private readonly IUsersService _userService;
 
-        public AuthController(IConfiguration configuration, IUserService userService)
+        public AuthController(IConfiguration configuration, IUsersService userService)
         {
             _configuration = configuration;
             _userService = userService;
@@ -34,7 +34,7 @@ namespace SaitynoLab.Server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(UserAuthDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -46,7 +46,7 @@ namespace SaitynoLab.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(UserAuthDto request)
         {
             //logika ir pasiemima vis tiek i services keliaus, tai meh...
             if (user.Username != request.UserName)

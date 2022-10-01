@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SaitynoLab.Server.Data;
-using SaitynoLab.Server.Services.UserService;
+using SaitynoLab.Server.Services.FurnitureService;
+using SaitynoLab.Server.Services.OrdersService;
+using SaitynoLab.Server.Services.UsersService;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
+builder.Services.AddScoped<IFurnitureService, FurnitureService>();
 
 builder.Services.AddHttpContextAccessor();
 

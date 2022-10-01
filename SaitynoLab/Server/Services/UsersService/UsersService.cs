@@ -4,14 +4,14 @@ using SaitynoLab.Server.Dto;
 using SaitynoLab.Shared;
 using System.Security.Claims;
 
-namespace SaitynoLab.Server.Services.UserService
+namespace SaitynoLab.Server.Services.UsersService
 {
-    public class UserService : IUserService
+    public class UsersService : IUsersService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly DataContext _context;
 
-        public UserService(IHttpContextAccessor httpContextAccessor, DataContext context)
+        public UsersService(IHttpContextAccessor httpContextAccessor, DataContext context)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
@@ -54,12 +54,12 @@ namespace SaitynoLab.Server.Services.UserService
         public async Task<User> GetUser(int id)
         {
             User? user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-            return user;
+            return user; ;
         }
 
-        public async Task<User> UpdateUser(UserUpdateDto userUpdateDto)
+        public async Task<User> UpdateUser(int id, UserUpdateDto userUpdateDto)
         {
-            var dbUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == userUpdateDto.Id);
+            var dbUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (dbUser == null)
             {
                 return null;

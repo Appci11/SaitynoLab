@@ -40,9 +40,9 @@ namespace SaitynoLab.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddOrder(Order order)
+        public async Task<IActionResult> AddOrder(OrderCreateDto orderCreateDto)
         {
-            Order response = await _ordersService.AddOrder(order);
+            Order response = await _ordersService.AddOrder(orderCreateDto);
             if (response != null)
             {
                 return Created($"/api/orders/{response.Id}", response);

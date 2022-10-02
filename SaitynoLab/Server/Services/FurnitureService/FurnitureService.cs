@@ -17,14 +17,17 @@ namespace SaitynoLab.Server.Services.FurnitureService
             _context = context;
             _ordersService = ordersService;
         }
-        public async Task<Furniture> AddFurniture(int orderId, Furniture furniture)
+        public async Task<Furniture> AddFurniture(int orderId, FurnitureCreateDto furnitureCreateDto)
         {
             Order dbOrder = await _ordersService.GetOrder(orderId);
             if (dbOrder == null)
             {
                 return null;
             }
+            Furniture furniture = new();
             furniture.OrderId = orderId;
+            furniture.Name = furnitureCreateDto.Name;
+            furniture.ToAssemble = furnitureCreateDto.ToAssemble;
             _context.Furniture.Add(furniture);
             await _context.SaveChangesAsync();
             return furniture;

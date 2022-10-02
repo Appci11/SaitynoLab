@@ -38,9 +38,9 @@ namespace SaitynoLab.Server.Controllers
             else return NotFound(new { message = "Furniture not found" });
         }
         [HttpPost]
-        public async Task<IActionResult> AddFurniture(int orderId, Furniture furniture)
+        public async Task<IActionResult> AddFurniture(int orderId, FurnitureCreateDto furnitureCreateDto)
         {
-            Furniture response = await _furnitureService.AddFurniture(orderId, furniture);
+            Furniture response = await _furnitureService.AddFurniture(orderId, furnitureCreateDto);
             if (response != null)
             {
                 return Created($"/api/orders/{orderId}/furniture/{response.Id}", response);

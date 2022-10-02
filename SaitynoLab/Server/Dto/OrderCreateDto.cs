@@ -2,8 +2,10 @@
 
 namespace SaitynoLab.Server.Dto
 {
-    public class OrderUpdateDto
+    public class OrderCreateDto
     {
+        [Required]
+        public int BuyerId { get; set; }
         [Required]
         public string Email { get; set; } = string.Empty;
         [Required]

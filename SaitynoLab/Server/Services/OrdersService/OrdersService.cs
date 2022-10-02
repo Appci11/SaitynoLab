@@ -14,8 +14,13 @@ namespace SaitynoLab.Server.Services.OrdersService
             _context = context;
         }
 
-        public async Task<Order> AddOrder(Order order)
+        public async Task<Order> AddOrder(OrderCreateDto orderCreateDto)
         {
+            Order order = new ();
+            order.BuyerId = orderCreateDto.BuyerId;
+            order.Email = orderCreateDto.Email;
+            order.PhoneNumber = orderCreateDto.PhoneNumber;
+            order.IsCompleted = orderCreateDto.IsCompleted;
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
             return order;

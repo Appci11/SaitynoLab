@@ -38,9 +38,9 @@ namespace SaitynoLab.Server.Controllers
             else return NotFound(new { message = "Bad id provided or nothing found" });
         }
         [HttpPost]
-        public async Task<IActionResult> AddPart(int orderId, int furnitureId, Part part)
+        public async Task<IActionResult> AddPart(int orderId, int furnitureId, PartCreateDto partCreateDto)
         {
-            Part response = await _partsService.AddPart(orderId, furnitureId, part);
+            Part response = await _partsService.AddPart(orderId, furnitureId, partCreateDto);
             {
                 if (response != null)
                 {

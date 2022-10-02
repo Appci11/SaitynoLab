@@ -17,14 +17,18 @@ namespace SaitynoLab.Server.Services.PartsService
             _furnitureService = furnitureService;
         }
 
-        public async Task<Part> AddPart(int orderId, int furnitureId, Part part)
+        public async Task<Part> AddPart(int orderId, int furnitureId, PartCreateDto partCreateDto)
         {
             Furniture check = await _furnitureService.GetFurniture(orderId, furnitureId);
             if (check == null)
             {
                 return null;
             }
+            Part part = new();
             part.FurnitureId = furnitureId;
+            part.Name = partCreateDto.Name;
+            part.Price = partCreateDto.Price;
+            part.Color = partCreateDto.Color;
             _context.Parts.Add(part);
             await _context.SaveChangesAsync();
             return part;

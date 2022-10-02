@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SaitynoLab.Server.Data;
 
@@ -11,9 +12,10 @@ using SaitynoLab.Server.Data;
 namespace SaitynoLab.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221002121919_Add_Orders")]
+    partial class Add_Orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,22 +45,6 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Furniture");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Stalas1",
-                            OrderId = 1,
-                            ToAssemble = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Stalas2",
-                            OrderId = 1,
-                            ToAssemble = true
-                        });
                 });
 
             modelBuilder.Entity("SaitynoLab.Shared.Order", b =>
@@ -95,7 +81,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 1,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3449),
+                            DateCreated = new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1502),
                             Email = "Pvz.pastas@kazkas.com",
                             IsCompleted = false,
                             PhoneNumber = "867864264"
@@ -104,7 +90,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 2,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3453),
+                            DateCreated = new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1505),
                             Email = "Pvz.pastas@kazkas.com",
                             IsCompleted = false,
                             PhoneNumber = "867864264"
@@ -135,24 +121,6 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Color = 5,
-                            FurnitureId = 1,
-                            Name = "Stalo koja V1",
-                            Price = 9.9900000000000002
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Color = 5,
-                            FurnitureId = 1,
-                            Name = "Stalo koja V1",
-                            Price = 9.9900000000000002
-                        });
                 });
 
             modelBuilder.Entity("SaitynoLab.Shared.User", b =>
@@ -187,14 +155,14 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3345),
+                            DateCreated = new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1379),
                             Username = "User1",
                             isDeleted = false
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3374),
+                            DateCreated = new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1415),
                             Username = "User2",
                             isDeleted = false
                         });

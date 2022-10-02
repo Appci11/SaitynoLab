@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SaitynoLab.Server.Migrations
 {
-    public partial class Seeding_Furniture : Migration
+    public partial class Add_Furniture : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,28 +23,28 @@ namespace SaitynoLab.Server.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3349));
+                value: new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7179));
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3352));
+                value: new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7182));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3240));
+                value: new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7039));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3276));
+                value: new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7075));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -64,28 +64,28 @@ namespace SaitynoLab.Server.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3803));
+                value: new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1502));
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3807));
+                value: new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1505));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3704));
+                value: new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1379));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "DateCreated",
-                value: new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3735));
+                value: new DateTime(2022, 10, 2, 15, 19, 19, 446, DateTimeKind.Local).AddTicks(1415));
         }
     }
 }

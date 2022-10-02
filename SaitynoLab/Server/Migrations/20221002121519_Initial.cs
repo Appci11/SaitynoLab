@@ -15,9 +15,9 @@ namespace SaitynoLab.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ToAssemble = table.Column<bool>(type: "bit", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false)
+                    ToAssemble = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,6 +42,22 @@ namespace SaitynoLab.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Parts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FurnitureId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Color = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Parts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -57,24 +73,6 @@ namespace SaitynoLab.Server.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "Id", "BuyerId", "DateCreated", "Email", "IsCompleted", "PhoneNumber" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3803), "Pvz.pastas@kazkas.com", false, "867864264" },
-                    { 2, 1, new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3807), "Pvz.pastas@kazkas.com", false, "867864264" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "DateCreated", "PasswordHash", "PasswordSalt", "Username", "isDeleted" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3704), null, null, "User1", false },
-                    { 2, new DateTime(2022, 10, 1, 20, 27, 46, 309, DateTimeKind.Local).AddTicks(3735), null, null, "User2", false }
-                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -84,6 +82,9 @@ namespace SaitynoLab.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Parts");
 
             migrationBuilder.DropTable(
                 name: "Users");

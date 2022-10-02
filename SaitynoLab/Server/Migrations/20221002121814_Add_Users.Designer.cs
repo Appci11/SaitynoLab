@@ -12,8 +12,8 @@ using SaitynoLab.Server.Data;
 namespace SaitynoLab.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221001174017_Seeding_Furniture")]
-    partial class Seeding_Furniture
+    [Migration("20221002121814_Add_Users")]
+    partial class Add_Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,22 +45,6 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Furniture");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Stalas1",
-                            OrderId = 1,
-                            ToAssemble = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Stalas2",
-                            OrderId = 1,
-                            ToAssemble = true
-                        });
                 });
 
             modelBuilder.Entity("SaitynoLab.Shared.Order", b =>
@@ -91,26 +75,32 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3349),
-                            Email = "Pvz.pastas@kazkas.com",
-                            IsCompleted = false,
-                            PhoneNumber = "867864264"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3352),
-                            Email = "Pvz.pastas@kazkas.com",
-                            IsCompleted = false,
-                            PhoneNumber = "867864264"
-                        });
+            modelBuilder.Entity("SaitynoLab.Shared.Part", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Color")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FurnitureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Parts");
                 });
 
             modelBuilder.Entity("SaitynoLab.Shared.User", b =>
@@ -145,14 +135,14 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3240),
+                            DateCreated = new DateTime(2022, 10, 2, 15, 18, 14, 831, DateTimeKind.Local).AddTicks(6807),
                             Username = "User1",
                             isDeleted = false
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 10, 1, 20, 40, 17, 348, DateTimeKind.Local).AddTicks(3276),
+                            DateCreated = new DateTime(2022, 10, 2, 15, 18, 14, 831, DateTimeKind.Local).AddTicks(6836),
                             Username = "User2",
                             isDeleted = false
                         });

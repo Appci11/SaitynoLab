@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace SaitynoLab.Shared
 {
-    public class Furniture
+    public class Part
     {
         public int Id { get; set; }
         [Required]
-        public int OrderId { get; set; }
+        public int FurnitureId { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
-        public bool ToAssemble { get; set; } = true;
-
+        [Required]
+        public double Price { get; set; }
+        public PartColor Color { get; set; } = PartColor.White;
     }
 }

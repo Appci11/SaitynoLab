@@ -2,6 +2,7 @@
 //in server dir
 //dotnet ef migrations add <insert whatever here>
 //dotnet ef database update
+//dotnet ef migrations remove       removes last migration
 
 using Microsoft.EntityFrameworkCore;
 using SaitynoLab.Shared;
@@ -18,6 +19,7 @@ namespace SaitynoLab.Server.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Furniture> Furniture { get; set; }
+        public DbSet<Part> Parts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,16 +47,34 @@ namespace SaitynoLab.Server.Data
                 new Furniture
                 {
                     Id = 1,
-                    Name = "Stalas1",
-                    OrderId = 1
+                    OrderId = 1,
+                    Name = "Stalas1"
                 },
                 new Furniture
                 {
                     Id = 2,
-                    Name = "Stalas2",
-                    OrderId = 1
+                    OrderId = 1,
+                    Name = "Stalas2"
+                }
+            );
+            modelBuilder.Entity<Part>().HasData(
+                new Part
+                {
+                    Id = 1,
+                    FurnitureId = 1,
+                    Name = "Stalo koja V1",
+                    Price = 9.99
+                },
+                new Part
+                {
+                    Id = 2,
+                    FurnitureId = 1,
+                    Name = "Stalo koja V1",
+                    Price = 9.99
                 }
             );
         }
     }
 }
+
+

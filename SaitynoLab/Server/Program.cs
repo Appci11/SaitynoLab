@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using SaitynoLab.Server.Data;
 using SaitynoLab.Server.Services.FurnitureService;
 using SaitynoLab.Server.Services.OrdersService;
+using SaitynoLab.Server.Services.PartsService;
 using SaitynoLab.Server.Services.UsersService;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -21,6 +22,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IOrdersService, OrdersService>();
 builder.Services.AddScoped<IFurnitureService, FurnitureService>();
+builder.Services.AddScoped<IPartsService, PartsService>();
 
 builder.Services.AddHttpContextAccessor();
 

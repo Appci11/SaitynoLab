@@ -28,6 +28,27 @@ namespace SaitynoLab.Server.Services.OrdersService
             {
                 return null;
             }
+            //cascade delete if FK found
+            List<Furniture> furnitureList = await _context.Furniture
+                .Where(f => f.OrderId == id)
+                .ToListAsync();
+            if (furnitureList.Count > 0)
+            {
+                foreach (Furniture fur in furnitureList)
+                {
+                    List<Part> partsList = await _context.Parts
+                        .Where(p => p.FurnitureId == fur.Id)
+                        .ToListAsync();
+                    if (partsList.Count > 0)
+                    {
+                        foreach(Part part in partsList)
+                        {
+                            _context.Parts.Remove(part);
+                        }
+                    }
+                    _context.Furniture.Remove(fur);
+                }
+            }
             _context.Orders.Remove(dbOrder);
             await _context.SaveChangesAsync();
             return dbOrder;

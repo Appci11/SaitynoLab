@@ -2,6 +2,7 @@
 using SaitynoLab.Server.Data;
 using SaitynoLab.Server.Dto;
 using SaitynoLab.Server.Services.OrdersService;
+using SaitynoLab.Server.Services.PartsService;
 using SaitynoLab.Shared;
 
 namespace SaitynoLab.Server.Services.FurnitureService
@@ -31,20 +32,28 @@ namespace SaitynoLab.Server.Services.FurnitureService
 
         public async Task<Furniture> DeleteFurniture(int orderId, int furnitureId)
         {
-            Order dbOrder = await _ordersService.GetOrder(orderId);
-            if (dbOrder == null)
-            {
-                return null;
-            }
-            Furniture dbFurniture = await _context.Furniture.FirstOrDefaultAsync(
-                f => f.Id == furnitureId && f.OrderId == orderId);
+            Furniture dbFurniture = await GetFurniture(orderId, furnitureId);
             if (dbFurniture == null)
             {
                 return null;
             }
+            //if this furniture ID is FK to smth else, cascade delete
+            List<Part> check = await _context.Parts
+                .Where(p => p.FurnitureId == furnitureId)
+                .ToListAsync();
+            if(check.Count > 0)
+            {
+                foreach(Part kriu in check)
+                {
+                    _context.Parts.Remove(kriu);
+                }
+            }
             _context.Furniture.Remove(dbFurniture);
             await _context.SaveChangesAsync();
             return dbFurniture;
+
+
+
         }
 
         public async Task<List<Furniture>> GetAllFurniture(int orderId)

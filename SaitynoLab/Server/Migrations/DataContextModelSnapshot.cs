@@ -48,15 +48,36 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Stalas1",
+                            Name = "Kėdė v1",
                             OrderId = 1,
                             ToAssemble = true
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Stalas2",
+                            Name = "Kėdė v2",
                             OrderId = 1,
+                            ToAssemble = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Stalas v1",
+                            OrderId = 1,
+                            ToAssemble = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Stalas v2",
+                            OrderId = 2,
+                            ToAssemble = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Knygų lentyna v1",
+                            OrderId = 2,
                             ToAssemble = true
                         });
                 });
@@ -95,19 +116,46 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 1,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3449),
-                            Email = "Pvz.pastas@kazkas.com",
+                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2934),
+                            Email = "cclaire0@cloudflare.com",
                             IsCompleted = false,
-                            PhoneNumber = "867864264"
+                            PhoneNumber = "+55 575 366 5029"
                         },
                         new
                         {
                             Id = 2,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3453),
-                            Email = "Pvz.pastas@kazkas.com",
+                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2937),
+                            Email = "odagleas1@desdev.cn",
                             IsCompleted = false,
-                            PhoneNumber = "867864264"
+                            PhoneNumber = "+55 126 791 9151"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BuyerId = 1,
+                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2940),
+                            Email = "chanson2@adobe.com",
+                            IsCompleted = false,
+                            PhoneNumber = "+351 451 804 0946"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BuyerId = 2,
+                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2942),
+                            Email = "cbastiman3@bbb.org",
+                            IsCompleted = false,
+                            PhoneNumber = "+46 907 344 5728"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BuyerId = 2,
+                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2944),
+                            Email = "lsafont4@ezinearticles.com",
+                            IsCompleted = false,
+                            PhoneNumber = "+7 509 606 2496"
                         });
                 });
 
@@ -142,16 +190,64 @@ namespace SaitynoLab.Server.Migrations
                             Id = 1,
                             Color = 5,
                             FurnitureId = 1,
-                            Name = "Stalo koja V1",
+                            Name = "Kėdės kojos V1",
                             Price = 9.9900000000000002
                         },
                         new
                         {
                             Id = 2,
                             Color = 5,
-                            FurnitureId = 1,
-                            Name = "Stalo koja V1",
+                            FurnitureId = 2,
+                            Name = "Kėdės kojos V2",
                             Price = 9.9900000000000002
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Color = 5,
+                            FurnitureId = 1,
+                            Name = "Stalo kojos V1",
+                            Price = 20.989999999999998
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Color = 5,
+                            FurnitureId = 2,
+                            Name = "Stalo kojos V2",
+                            Price = 20.989999999999998
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Color = 5,
+                            FurnitureId = 1,
+                            Name = "Kėdės viršus V1",
+                            Price = 8.9900000000000002
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Color = 5,
+                            FurnitureId = 2,
+                            Name = "Kėdės viršus V2",
+                            Price = 8.9900000000000002
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Color = 5,
+                            FurnitureId = 1,
+                            Name = "Stalo viršus V1",
+                            Price = 17.989999999999998
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Color = 5,
+                            FurnitureId = 2,
+                            Name = "Stalo viršus V1",
+                            Price = 18.989999999999998
                         });
                 });
 
@@ -187,14 +283,14 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3345),
+                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2829),
                             Username = "User1",
                             isDeleted = false
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 21, 3, 314, DateTimeKind.Local).AddTicks(3374),
+                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2860),
                             Username = "User2",
                             isDeleted = false
                         });

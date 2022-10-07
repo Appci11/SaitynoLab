@@ -12,8 +12,8 @@ using SaitynoLab.Server.Data;
 namespace SaitynoLab.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221002122011_Add_Furniture")]
-    partial class Add_Furniture
+    [Migration("20221007093517_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,22 +45,6 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Furniture");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Stalas1",
-                            OrderId = 1,
-                            ToAssemble = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Stalas2",
-                            OrderId = 1,
-                            ToAssemble = true
-                        });
                 });
 
             modelBuilder.Entity("SaitynoLab.Shared.Order", b =>
@@ -91,26 +75,6 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7179),
-                            Email = "Pvz.pastas@kazkas.com",
-                            IsCompleted = false,
-                            PhoneNumber = "867864264"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7182),
-                            Email = "Pvz.pastas@kazkas.com",
-                            IsCompleted = false,
-                            PhoneNumber = "867864264"
-                        });
                 });
 
             modelBuilder.Entity("SaitynoLab.Shared.Part", b =>
@@ -166,22 +130,6 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7039),
-                            Username = "User1",
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateCreated = new DateTime(2022, 10, 2, 15, 20, 10, 960, DateTimeKind.Local).AddTicks(7075),
-                            Username = "User2",
-                            isDeleted = false
-                        });
                 });
 #pragma warning restore 612, 618
         }

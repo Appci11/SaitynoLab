@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SaitynoLab.Server.Dto;
+using SaitynoLab.Server.Services.AuthService;
 using SaitynoLab.Server.Services.UsersService;
 using SaitynoLab.Shared;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,96 +16,51 @@ namespace SaitynoLab.Server.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
-        private readonly IConfiguration _configuration;
-        private readonly IUsersService _userService;
+        private readonly IAuthService _authService;
 
-        public AuthController(IConfiguration configuration, IUsersService userService)
+        public AuthController(IAuthService authService)
         {
-            _configuration = configuration;
-            _userService = userService;
-        }
-
-        //pasitikrinimui ar GetMyName ar veikia
-        [HttpGet, Authorize]
-        public ActionResult<string> GetMe()
-        {
-            var userName = _userService.GetMyName();
-            return Ok(userName);
+            _authService = authService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserAuthDto request)
+        public async Task<ActionResult> Register(UserAuthDto request)
         {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
-            user.Username = request.UserName;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            return Ok(user);
+            User response = await _authService.RegisterUser(request);
+            if (response != null)
+            {
+                return Ok(new { Username = response.Username, message = "Successfully registered" });
+            }
+            else return NotFound(new { message = "Username already exists" });
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserAuthDto request)
         {
-            //logika ir pasiemima vis tiek i services keliaus, tai meh...
-            if (user.Username != request.UserName)
+            string token = await _authService.LoginUser(request);
+            if (token != null)
             {
-                return BadRequest("User not found.");
+                return Ok(token);
             }
-            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
-            {
-                return BadRequest("Wrong Password.");
-            }
-
-            string token = CreateToken(user);
-            return Ok(token);
-
-            //return Ok("Totally a JWT token...");
+            else return NotFound(new { message = "Wrong user or password" });
         }
 
-        private string CreateToken(User user)
+
+
+
+        //pasitikrinimui ar veikia
+        [HttpGet("userIsRegisteredUserMsg")]
+        [Authorize(Roles = "RegisteredUser")]
+        public ActionResult<string> GetMessageRegisteredUser()
         {
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "Admin")
-            };
-
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                _configuration.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: creds);
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
+            //var userName = _userService.GetMyName();
+            return Ok("Registered users can read this");
         }
-
-        //Negrazus variantas, nugrust i Services, kai bus services...
-        // PRIVATEEEEE !!!
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        [HttpGet("userIsAdminMsg")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult<string> GetMessageAdmin()
         {
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
-        }
-
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
-            }
+            return Ok("Admins can read this");
         }
     }
 }

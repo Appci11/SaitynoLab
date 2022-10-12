@@ -12,8 +12,8 @@ using SaitynoLab.Server.Data;
 namespace SaitynoLab.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221007094322_DataSeeding")]
-    partial class DataSeeding
+    [Migration("20221012173538_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,7 +118,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 1,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2934),
+                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3543),
                             Email = "cclaire0@cloudflare.com",
                             IsCompleted = false,
                             PhoneNumber = "+55 575 366 5029"
@@ -127,7 +127,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 2,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2937),
+                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3575),
                             Email = "odagleas1@desdev.cn",
                             IsCompleted = false,
                             PhoneNumber = "+55 126 791 9151"
@@ -136,7 +136,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 3,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2940),
+                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3577),
                             Email = "chanson2@adobe.com",
                             IsCompleted = false,
                             PhoneNumber = "+351 451 804 0946"
@@ -145,7 +145,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 4,
                             BuyerId = 2,
-                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2942),
+                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3579),
                             Email = "cbastiman3@bbb.org",
                             IsCompleted = false,
                             PhoneNumber = "+46 907 344 5728"
@@ -154,7 +154,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 5,
                             BuyerId = 2,
-                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2944),
+                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3582),
                             Email = "lsafont4@ezinearticles.com",
                             IsCompleted = false,
                             PhoneNumber = "+7 509 606 2496"
@@ -270,6 +270,10 @@ namespace SaitynoLab.Server.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -280,22 +284,6 @@ namespace SaitynoLab.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2829),
-                            Username = "User1",
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateCreated = new DateTime(2022, 10, 7, 12, 43, 21, 864, DateTimeKind.Local).AddTicks(2860),
-                            Username = "User2",
-                            isDeleted = false
-                        });
                 });
 #pragma warning restore 612, 618
         }

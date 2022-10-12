@@ -18,6 +18,7 @@ namespace SaitynoLab.Shared
         public byte[]? PasswordSalt { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public bool isDeleted { get; set; } = false;
+        public string Role { get; set; } = "RegisteredUser";
 
     }
 }

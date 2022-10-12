@@ -23,10 +23,11 @@ namespace SaitynoLab.Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Username = "User1" },
-                new User { Id = 2, Username = "User2" }
-            );
+            //nebetinka, nes kode naudojam passHash etc...
+            //modelBuilder.Entity<User>().HasData(
+            //    new User { Id = 1, Username = "User1" },
+            //    new User { Id = 2, Username = "User2" }
+            //);
             modelBuilder.Entity<SaitynoLab.Shared.Order>().HasData(
                 new Order
                 {

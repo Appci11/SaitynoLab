@@ -65,6 +65,7 @@ namespace SaitynoLab.Server.Services.UsersService
                 return null;
             }
             dbUser.Username = userUpdateDto.Username;
+            dbUser.Role = userUpdateDto.Role;
             await _context.SaveChangesAsync();
             return dbUser;
         }

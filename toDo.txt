@@ -1,0 +1,2 @@
+i controller suded ka kuri role gali daryt
+cloud'e update'int api ir DB

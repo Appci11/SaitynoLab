@@ -40,6 +40,7 @@ namespace SaitynoLab.Server.Controllers
             string token = await _authService.LoginUser(request);
             if (token != null)
             {
+                //return Ok(new { token = token });
                 return Ok(token);
             }
             else return NotFound(new { message = "Wrong user or password" });

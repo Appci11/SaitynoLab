@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SaitynoLab.Server.Dto;
+using SaitynoLab.Shared.Dto;
 using SaitynoLab.Server.Services.OrdersService;
 using SaitynoLab.Shared;
 

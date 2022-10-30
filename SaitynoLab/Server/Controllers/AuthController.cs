@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using SaitynoLab.Server.Dto;
+using SaitynoLab.Shared.Dto;
 using SaitynoLab.Server.Services.AuthService;
 using SaitynoLab.Server.Services.UsersService;
 using SaitynoLab.Shared;

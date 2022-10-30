@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SaitynoLab.Server.Dto;
+using SaitynoLab.Shared.Dto;
 using SaitynoLab.Server.Services.UsersService;
 using SaitynoLab.Shared;
 

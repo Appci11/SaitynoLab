@@ -1,9 +1,9 @@
 ﻿using SaitynoLab.Shared;
 using System.ComponentModel.DataAnnotations;
 
-namespace SaitynoLab.Server.Dto
+namespace SaitynoLab.Shared.Dto
 {
-    public class PartCreateDto
+    public class PartUpdateDto
     {
         [Required]
         public string Name { get; set; } = string.Empty;

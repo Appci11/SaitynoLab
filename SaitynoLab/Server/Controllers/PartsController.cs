@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SaitynoLab.Server.Dto;
+using SaitynoLab.Shared.Dto;
 using SaitynoLab.Server.Services.PartsService;
 using SaitynoLab.Shared;
 using System.Data;

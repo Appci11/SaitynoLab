@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SaitynoLab.Server.Data;
-using SaitynoLab.Server.Dto;
+using SaitynoLab.Shared.Dto;
 using SaitynoLab.Shared;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

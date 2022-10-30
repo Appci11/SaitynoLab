@@ -1,4 +1,4 @@
-﻿using SaitynoLab.Server.Dto;
+﻿using SaitynoLab.Shared.Dto;
 using SaitynoLab.Shared;
 
 namespace SaitynoLab.Server.Services.AuthService

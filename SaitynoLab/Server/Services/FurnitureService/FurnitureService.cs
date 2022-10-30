@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaitynoLab.Server.Data;
-using SaitynoLab.Server.Dto;
+using SaitynoLab.Shared.Dto;
 using SaitynoLab.Server.Services.OrdersService;
 using SaitynoLab.Server.Services.PartsService;
 using SaitynoLab.Shared;

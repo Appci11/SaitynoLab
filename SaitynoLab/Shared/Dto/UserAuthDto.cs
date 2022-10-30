@@ -1,4 +1,4 @@
-﻿namespace SaitynoLab.Server.Dto
+﻿namespace SaitynoLab.Shared.Dto
 {
     public class UserAuthDto
     {

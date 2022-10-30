@@ -22,8 +22,8 @@ namespace SaitynoLab.Server.Services.AuthService
         }
         public async Task<string> LoginUser(UserAuthDto request)
         {
-            User? user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.UserName);
-            if (user == null || user.Username != request.UserName)
+            User? user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+            if (user == null || user.Username != request.Username)
             {
                 return null;
             }
@@ -38,14 +38,14 @@ namespace SaitynoLab.Server.Services.AuthService
 
         public async Task<User> RegisterUser(UserAuthDto request)
         {
-            User? found = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.UserName);
+            User? found = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
             if(found != null)
             {
                 return null;
             }
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             User user = new User();
-            user.Username = request.UserName;
+            user.Username = request.Username;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             _context.Users.Add(user);

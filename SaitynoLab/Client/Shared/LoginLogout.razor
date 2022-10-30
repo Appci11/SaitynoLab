@@ -4,12 +4,16 @@
 
 <AuthorizeView>
     <Authorized>
-        <button @onclick="Logout" class="btn btn-danger">Logout</button>
+        @*<button @onclick="Logout" class="btn btn-danger">Logout</button>*@
+        <button @onclick="Logout" class="btn danger" style="border:none">Logout</button>
     </Authorized>
     <NotAuthorized>
-        <button @onclick="Login" class="btn btn-primary">Login</button>
+        @*<button @onclick="Login" class="btn btn-primary">Login</button>*@
+        <button @onclick="Login" class="btn info" style="border:none">Login</button>
     </NotAuthorized>
 </AuthorizeView>
+
+
 
 @code {
     void Login()
@@ -23,3 +27,5 @@
         await AuthStateProvider.GetAuthenticationStateAsync();
     }
 }
+
+

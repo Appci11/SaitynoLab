@@ -1,0 +1,48 @@
+﻿@page "/users"
+@inject IUsersService UsersService
+@inject NavigationManager NavigationManager
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Users</PageTitle>
+
+<h3>Users</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Created On</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in UsersService.Users)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Role</td>
+                <td>@user.DateCreated</td>
+                <td><button class="btn btn-primary" @onclick="(() => ShowUser(user.Id))"><i class="oi oi-pencil"></i></button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="CreateNewUser">Create new user</button>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await UsersService.GetUsers();
+    }
+
+    void ShowUser(int id)
+    {
+        NavigationManager.NavigateTo($"user/{id}");
+    }
+
+    void CreateNewUser()
+    {
+        NavigationManager.NavigateTo("/user");
+    }
+}

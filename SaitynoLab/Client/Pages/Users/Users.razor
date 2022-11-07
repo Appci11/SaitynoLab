@@ -7,33 +7,43 @@
 
 <h3>Users</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Created On</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in UsersService.Users)
-        {
+@if(Loaded)
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@user.Username</td>
-                <td>@user.Role</td>
-                <td>@user.DateCreated</td>
-                <td><button class="btn btn-primary" @onclick="(() => ShowUser(user.Id))"><i class="oi oi-pencil"></i></button></td>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Created On</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<button class="btn btn-primary" @onclick="CreateNewUser">Create new user</button>
+        </thead>
+        <tbody>
+            @foreach (var user in UsersService.Users)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Role</td>
+                    <td>@user.DateCreated</td>
+                    <td><button class="btn btn-primary" @onclick="(() => ShowUser(user.Id))"><i class="oi oi-pencil"></i></button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-primary" @onclick="CreateNewUser">Create new user</button>
+}
+else
+{
+    <p>Getting data...</p>
+}
 
 @code {
+    bool Loaded = false;
+
     protected override async Task OnInitializedAsync()
     {
         await UsersService.GetUsers();
+        Loaded = true;
     }
 
     void ShowUser(int id)

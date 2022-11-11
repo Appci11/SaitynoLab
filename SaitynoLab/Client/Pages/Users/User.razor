@@ -23,7 +23,11 @@ else
     {
         <div>
             <label for="role">Role</label>
-            <InputText id="role" @bind-Value="user.Role" class="form-control"></InputText>
+            @*<InputText id="role" @bind-Value="user.Role" class="form-control"></InputText>*@
+            <select id="role" class="form-select" @bind="user.Role">
+                <option value="Admin">Admin</option>
+                <option value="RegisteredUser">RegisteredUser</option>
+            </select>
         </div>
     }
     <br />

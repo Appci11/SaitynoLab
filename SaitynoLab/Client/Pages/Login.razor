@@ -4,15 +4,29 @@
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
 
-<h3>Login</h3>
+<body>
+    <h3>Login</h3>
 
-<EditForm Model="user" OnSubmit="HandleLogin">
-    <label for="username">Name</label>
-    <InputText id="username" @bind-Value="user.Username" />
-    <label for="password">Password</label>
-    <InputText id="password" @bind-Value="user.Password" type="password" />
-    <button type="submit" class="btn btn-primary">Login</button>
-</EditForm>
+    <EditForm Model="user" OnSubmit="HandleLogin">
+        <div>
+            <InputText id="username" @bind-Value="user.Username" />
+            <label for="username">Name</label>
+        </div>
+        <div>
+            <InputText id="password" @bind-Value="user.Password" type="password" />
+            <label for="password">Password</label>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </EditForm>
+    <br />
+    <br />
+    <div>
+        Not a member? <a href="register">Register</a>
+    </div>
+
+</body>
 
 @code {
     UserAuthDto user = new UserAuthDto();

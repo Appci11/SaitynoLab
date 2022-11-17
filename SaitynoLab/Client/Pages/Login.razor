@@ -9,11 +9,11 @@
 
     <EditForm Model="user" OnSubmit="HandleLogin">
         <div>
-            <InputText id="username" @bind-Value="user.Username" />
+            <InputText id="username" @bind-Value="user.Username" @ref=inputTextForFocus />
             <label for="username">Name</label>
         </div>
         <div>
-            <InputText id="password" @bind-Value="user.Password" type="password" />
+            <InputText id="password" @bind-Value="user.Password" type="password" @onkeyup="HandleLogin" />
             <label for="password">Password</label>
         </div>
         <div>
@@ -21,6 +21,7 @@
         </div>
     </EditForm>
     <br />
+    <p style="color: red">@ErrorMsg</p>
     <br />
     <div>
         Not a member? <a href="register">Register</a>
@@ -30,14 +31,30 @@
 
 @code {
     UserAuthDto user = new UserAuthDto();
+    private InputText? inputTextForFocus;
+    private string ErrorMsg = string.Empty;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            if (inputTextForFocus?.Element != null)
+                await inputTextForFocus.Element.Value.FocusAsync();
+    }
 
     async Task HandleLogin()
     {
         var result = await Http.PostAsJsonAsync("api/auth/login", user);
-        var token = await result.Content.ReadAsStringAsync();
-        Console.WriteLine(token);
-        await LocalStorage.SetItemAsync("token", token);
-        await AuthStateProvider.GetAuthenticationStateAsync();
-        NavigationManager.NavigateTo("");
+        if (result.IsSuccessStatusCode)
+        {
+            var token = await result.Content.ReadAsStringAsync();
+            await LocalStorage.SetItemAsync("token", token);
+            await AuthStateProvider.GetAuthenticationStateAsync();
+            ErrorMsg = string.Empty;
+            NavigationManager.NavigateTo("");
+        }
+        if (result.StatusCode.Equals(404))
+    {
+            ErrorMsg = "Incorrect username or password!";
+        }
     }
 }

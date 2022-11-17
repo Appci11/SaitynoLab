@@ -17,6 +17,7 @@ namespace SaitynoLab.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ToAssemble = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -77,14 +78,13 @@ namespace SaitynoLab.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Furniture",
-                columns: new[] { "Id", "Name", "OrderId", "ToAssemble" },
+                columns: new[] { "Id", "ImageUrl", "Name", "OrderId", "ToAssemble" },
                 values: new object[,]
                 {
-                    { 1, "Kėdė v1", 1, true },
-                    { 2, "Kėdė v2", 1, true },
-                    { 3, "Stalas v1", 1, true },
-                    { 4, "Stalas v2", 2, true },
-                    { 5, "Knygų lentyna v1", 2, true }
+                    { 1, "https://www.publicdomainpictures.net/pictures/80000/velka/chair-clipart.jpg", "Kėdė v1", 1, true },
+                    { 2, "https://www.pngmart.com/files/15/Wooden-Antique-Chair-PNG-Free-Download.png", "Kėdė v2", 1, true },
+                    { 3, "https://www.thesprucecrafts.com/thmb/9ZYpOqR3YHO3vUd4eJqBaXr_TAU=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/woodgears-dining-table-5696ad753df78cafda8f5854.png", "Stalas v1", 1, true },
+                    { 4, "https://p.turbosquid.com/ts-thumb/PP/2eYUS5/pY48APl0/logo/png/1580766180/1920x1080/fit_q99/cc21a59fb6ea56d96cb2519aa6261ba5d3b724a0/logo.jpg", "Stalas v2", 2, true }
                 });
 
             migrationBuilder.InsertData(
@@ -92,11 +92,8 @@ namespace SaitynoLab.Server.Migrations
                 columns: new[] { "Id", "BuyerId", "DateCreated", "Email", "IsCompleted", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3543), "cclaire0@cloudflare.com", false, "+55 575 366 5029" },
-                    { 2, 1, new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3575), "odagleas1@desdev.cn", false, "+55 126 791 9151" },
-                    { 3, 1, new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3577), "chanson2@adobe.com", false, "+351 451 804 0946" },
-                    { 4, 2, new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3579), "cbastiman3@bbb.org", false, "+46 907 344 5728" },
-                    { 5, 2, new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3582), "lsafont4@ezinearticles.com", false, "+7 509 606 2496" }
+                    { 1, 1, new DateTime(2022, 11, 16, 20, 55, 35, 205, DateTimeKind.Local).AddTicks(4273), "cclaire0@cloudflare.com", false, "+55 575 366 5029" },
+                    { 2, 1, new DateTime(2022, 11, 16, 20, 55, 35, 205, DateTimeKind.Local).AddTicks(4307), "odagleas1@desdev.cn", false, "+55 126 791 9151" }
                 });
 
             migrationBuilder.InsertData(
@@ -111,7 +108,7 @@ namespace SaitynoLab.Server.Migrations
                     { 5, 5, 1, "Kėdės viršus V1", 8.9900000000000002 },
                     { 6, 5, 2, "Kėdės viršus V2", 8.9900000000000002 },
                     { 7, 5, 1, "Stalo viršus V1", 17.989999999999998 },
-                    { 8, 5, 2, "Stalo viršus V1", 18.989999999999998 }
+                    { 8, 5, 2, "Stalo viršus V2", 18.989999999999998 }
                 });
         }
 

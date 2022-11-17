@@ -1,0 +1,21 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <button @onclick="GoBack" class="btn btn-secondary" style="min-width:120px">Cancel</button>
+    </div>
+    <div class="col-md-6">
+        <button @onclick="Continue" class="btn btn-secondary" style="min-width:120px">Continue</button>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    void Continue()
+    {
+        ModalInstance.CloseAsync();
+    }
+    void GoBack()
+    {
+        ModalInstance.CancelAsync();
+    }
+}

@@ -1,0 +1,79 @@
+﻿@page "/orders"
+
+
+@inject IOrdersService OrdersService
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+
+<PageTitle>Orders</PageTitle>
+
+<h3>Orders</h3>
+
+@if (Loaded)
+{
+    @if (OrdersService.Orders.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>BuyerId</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Creation Date</th>
+                    <th>Completed</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in OrdersService.Orders)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.BuyerId</td>
+                        <td>@order.Email</td>
+                        <td>@order.PhoneNumber</td>
+                        <td>@order.DateCreated</td>
+                        <td>@order.IsCompleted</td>
+                        <td><button class="btn btn-primary" @onclick="(() => ShowOrder(order.Id))"><i class="oi oi-pencil"></i></button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>No orders found</h2>
+    }
+}
+else
+{
+    <div class="loader">Loading...</div>
+}
+<AuthorizeView Roles="RegisteredUser">
+    <Authorized>
+        <button class="btn btn-primary" @onclick="CreateNewOrder">Create a new order</button>
+    </Authorized>
+    <NotAuthorized />
+</AuthorizeView>
+
+
+@code {
+    bool Loaded = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await OrdersService.GetOrders();
+        Loaded = true;
+    }
+
+    void ShowOrder(int id)
+    {
+        NavigationManager.NavigateTo($"order/{id}");
+    }
+
+    void CreateNewOrder()
+    {
+        NavigationManager.NavigateTo("/order");
+    }
+}

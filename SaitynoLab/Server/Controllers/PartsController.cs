@@ -19,7 +19,7 @@ namespace SaitynoLab.Server.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllParts(int orderId, int furnitureId)
         {
             List<Part> response = await _partsService.GetAllParts(orderId, furnitureId);
@@ -30,7 +30,7 @@ namespace SaitynoLab.Server.Controllers
             return Ok(response);
         }
         [HttpGet("{partId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetPart(int orderId, int furnitureId, int partId)
         {
             Part response = await _partsService.GetPart(orderId, furnitureId, partId);
@@ -41,7 +41,7 @@ namespace SaitynoLab.Server.Controllers
             else return NotFound(new { message = "Bad id provided or nothing found" });
         }
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddPart(int orderId, int furnitureId, PartCreateDto partCreateDto)
         {
             Part response = await _partsService.AddPart(orderId, furnitureId, partCreateDto);
@@ -54,7 +54,7 @@ namespace SaitynoLab.Server.Controllers
             }
         }
         [HttpPut("{partId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdatePart(int orderId, int furnitureId,
             int partId, PartUpdateDto partUpdateDto)
         {
@@ -66,7 +66,7 @@ namespace SaitynoLab.Server.Controllers
             else return NotFound(new { message = "Part was not updated" });
         }
         [HttpDelete("{partId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeletePart(int orderId, int furnitureId, int partId)
         {
             Part response = await _partsService.DeletePart(orderId, furnitureId, partId);

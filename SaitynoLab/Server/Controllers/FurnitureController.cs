@@ -9,7 +9,7 @@ namespace SaitynoLab.Server.Controllers
 {
     [Route("api/orders/{orderId}/[controller]")]
     [ApiController]
-    [Authorize(Roles = "RegisteredUser")]
+    //[Authorize(Roles = "RegisteredUser")]
     public class FurnitureController : ControllerBase
     {
         private readonly IFurnitureService _furnitureService;

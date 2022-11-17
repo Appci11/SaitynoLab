@@ -6,6 +6,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using SaitynoLab.Shared;
+using static System.Net.WebRequestMethods;
 
 namespace SaitynoLab.Server.Data
 {
@@ -42,27 +43,6 @@ namespace SaitynoLab.Server.Data
                     BuyerId = 1,
                     Email = "odagleas1@desdev.cn",
                     PhoneNumber = "+55 126 791 9151"
-                },
-                new Order
-                {
-                    Id = 3,
-                    BuyerId = 1,
-                    Email = "chanson2@adobe.com",
-                    PhoneNumber = "+351 451 804 0946"
-                },
-                new Order
-                {
-                    Id = 4,
-                    BuyerId = 2,
-                    Email = "cbastiman3@bbb.org",
-                    PhoneNumber = "+46 907 344 5728"
-                },
-                new Order
-                {
-                    Id = 5,
-                    BuyerId = 2,
-                    Email = "lsafont4@ezinearticles.com",
-                    PhoneNumber = "+7 509 606 2496"
                 }
             );
             modelBuilder.Entity<Furniture>().HasData(
@@ -70,31 +50,30 @@ namespace SaitynoLab.Server.Data
                 {
                     Id = 1,
                     OrderId = 1,
-                    Name = "Kėdė v1"
+                    Name = "Kėdė v1",
+                    ImageUrl = "https://www.publicdomainpictures.net/pictures/80000/velka/chair-clipart.jpg"
+
                 },
                 new Furniture
                 {
                     Id = 2,
                     OrderId = 1,
-                    Name = "Kėdė v2"
+                    Name = "Kėdė v2",
+                    ImageUrl = "https://www.pngmart.com/files/15/Wooden-Antique-Chair-PNG-Free-Download.png"
                 },
                 new Furniture
                 {
                     Id = 3,
                     OrderId = 1,
-                    Name = "Stalas v1"
+                    Name = "Stalas v1",
+                    ImageUrl = "https://www.thesprucecrafts.com/thmb/9ZYpOqR3YHO3vUd4eJqBaXr_TAU=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/woodgears-dining-table-5696ad753df78cafda8f5854.png"
                 },
                 new Furniture
                 {
                     Id = 4,
                     OrderId = 2,
-                    Name = "Stalas v2"
-                },
-                new Furniture
-                {
-                    Id = 5,
-                    OrderId = 2,
-                    Name = "Knygų lentyna v1"
+                    Name = "Stalas v2",
+                    ImageUrl = "https://p.turbosquid.com/ts-thumb/PP/2eYUS5/pY48APl0/logo/png/1580766180/1920x1080/fit_q99/cc21a59fb6ea56d96cb2519aa6261ba5d3b724a0/logo.jpg"
                 }
             );
             modelBuilder.Entity<Part>().HasData(
@@ -151,7 +130,7 @@ namespace SaitynoLab.Server.Data
                 {
                     Id = 8,
                     FurnitureId = 2,
-                    Name = "Stalo viršus V1",
+                    Name = "Stalo viršus V2",
                     Price = 18.99
                 }
             );

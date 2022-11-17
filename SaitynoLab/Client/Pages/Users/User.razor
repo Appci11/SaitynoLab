@@ -1,5 +1,6 @@
 ﻿@page "/user"
 @page "/user/{id:int}"
+
 @inject IUsersService UsersService
 @attribute [Authorize(Roles = "Admin")]
 

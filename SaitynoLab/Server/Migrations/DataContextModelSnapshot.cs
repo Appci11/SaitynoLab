@@ -30,6 +30,10 @@ namespace SaitynoLab.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -48,6 +52,7 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 1,
+                            ImageUrl = "https://www.publicdomainpictures.net/pictures/80000/velka/chair-clipart.jpg",
                             Name = "Kėdė v1",
                             OrderId = 1,
                             ToAssemble = true
@@ -55,6 +60,7 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 2,
+                            ImageUrl = "https://www.pngmart.com/files/15/Wooden-Antique-Chair-PNG-Free-Download.png",
                             Name = "Kėdė v2",
                             OrderId = 1,
                             ToAssemble = true
@@ -62,6 +68,7 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 3,
+                            ImageUrl = "https://www.thesprucecrafts.com/thmb/9ZYpOqR3YHO3vUd4eJqBaXr_TAU=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/woodgears-dining-table-5696ad753df78cafda8f5854.png",
                             Name = "Stalas v1",
                             OrderId = 1,
                             ToAssemble = true
@@ -69,14 +76,8 @@ namespace SaitynoLab.Server.Migrations
                         new
                         {
                             Id = 4,
+                            ImageUrl = "https://p.turbosquid.com/ts-thumb/PP/2eYUS5/pY48APl0/logo/png/1580766180/1920x1080/fit_q99/cc21a59fb6ea56d96cb2519aa6261ba5d3b724a0/logo.jpg",
                             Name = "Stalas v2",
-                            OrderId = 2,
-                            ToAssemble = true
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Knygų lentyna v1",
                             OrderId = 2,
                             ToAssemble = true
                         });
@@ -116,7 +117,7 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 1,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3543),
+                            DateCreated = new DateTime(2022, 11, 16, 20, 55, 35, 205, DateTimeKind.Local).AddTicks(4273),
                             Email = "cclaire0@cloudflare.com",
                             IsCompleted = false,
                             PhoneNumber = "+55 575 366 5029"
@@ -125,37 +126,10 @@ namespace SaitynoLab.Server.Migrations
                         {
                             Id = 2,
                             BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3575),
+                            DateCreated = new DateTime(2022, 11, 16, 20, 55, 35, 205, DateTimeKind.Local).AddTicks(4307),
                             Email = "odagleas1@desdev.cn",
                             IsCompleted = false,
                             PhoneNumber = "+55 126 791 9151"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BuyerId = 1,
-                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3577),
-                            Email = "chanson2@adobe.com",
-                            IsCompleted = false,
-                            PhoneNumber = "+351 451 804 0946"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BuyerId = 2,
-                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3579),
-                            Email = "cbastiman3@bbb.org",
-                            IsCompleted = false,
-                            PhoneNumber = "+46 907 344 5728"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            BuyerId = 2,
-                            DateCreated = new DateTime(2022, 10, 12, 20, 35, 38, 251, DateTimeKind.Local).AddTicks(3582),
-                            Email = "lsafont4@ezinearticles.com",
-                            IsCompleted = false,
-                            PhoneNumber = "+7 509 606 2496"
                         });
                 });
 
@@ -246,7 +220,7 @@ namespace SaitynoLab.Server.Migrations
                             Id = 8,
                             Color = 5,
                             FurnitureId = 2,
-                            Name = "Stalo viršus V1",
+                            Name = "Stalo viršus V2",
                             Price = 18.989999999999998
                         });
                 });

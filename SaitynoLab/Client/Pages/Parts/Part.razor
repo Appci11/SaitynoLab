@@ -1,0 +1,22 @@
+﻿@page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/part"
+@page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/part/{id:int}"
+
+@if (Id == null)
+{
+    <PageTitle>New Furniture</PageTitle>
+    <h3>Create a new furniture</h3>
+}
+else
+{
+    <PageTitle>Edit INSERT USERNAME HERE</PageTitle>
+    <h3>Edit SAME AS ABOVE</h3>
+}
+
+@code {
+    [Parameter]
+    public int? OrderId { get; set; }
+    [Parameter]
+    public int? FurnitureId { get; set; }
+    [Parameter]
+    public int? Id { get; set; }
+}

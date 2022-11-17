@@ -1,0 +1,77 @@
+﻿@page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/parts"
+
+@inject IPartsService PartsService
+@inject NavigationManager NavigationManager
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Parts</PageTitle>
+
+<h3>Parts</h3>
+
+@if (Loaded)
+{
+    @if (PartsService.Parts.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Order Id</th>
+                    <th>Furniture Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Colour</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var part in PartsService.Parts)
+                {
+                    <tr>
+                        <td>@part.Id</td>
+                        <td>@OrderId</td>
+                        <td>@FurnitureId</td>
+                        <td>@part.Name</td>
+                        <td>@part.Price</td>
+                        <td>@part.Color</td>
+                        <td><button class="btn btn-primary" @onclick="(() => ShowPart(part.Id))"><i class="oi oi-pencil"></i></button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>No parts found</h2>
+    }
+}
+else
+{
+    <div class="loader">Loading...</div>
+}
+<button class="btn btn-primary" @onclick="CreateNewPart">Add new part</button>
+
+
+@code {
+    [Parameter]
+    public int OrderId { get; set; }
+    [Parameter]
+    public int FurnitureId { get; set; }
+    bool Loaded = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await PartsService.GetParts(OrderId, FurnitureId);
+        Loaded = true;
+    }
+
+    void ShowPart(int id)
+    {
+        NavigationManager.NavigateTo($"/orders/{OrderId}/allfurniture/{FurnitureId}/part/{id}");
+    }
+
+    void CreateNewPart()
+    {
+        NavigationManager.NavigateTo($"/orders/{OrderId}/allfurniture/{FurnitureId}/part");
+    }
+}

@@ -10,8 +10,10 @@
 
 
 <PageTitle>Counter</PageTitle>
-<img src="https://drive.google.com/uc?export=view&id=1WwuO5AJccTorEo__wBU3jC3SJIu7izhc" alt="Kriu" style="width: 100%;">
 
+@*
+<img src="https://drive.google.com/uc?export=view&id=1WwuO5AJccTorEo__wBU3jC3SJIu7izhc" alt="Kriu" style="width: 100%;">
+*@
 <h1>Counter</h1>
 
 <p role="status">Current count: @currentCount</p>
@@ -22,6 +24,8 @@
 <p></p>
 
 <h3>@Jwt</h3>
+
+<button class="btn btn-primary" @onclick="ShowModal">Dialow window test</button>
 
 @*<AuthorizeView>*@
 <AuthorizeView Roles="Admin">
@@ -34,17 +38,16 @@
 </AuthorizeView>
 
 @code {
+    [CascadingParameter] IModalService Modal { get; set; }
+
     private int currentCount = 0;
-
     string Jwt = string.Empty;
-
-    
 
     protected override async Task OnInitializedAsync()
     {
         var token = await localStorage.GetItemAsync<string>("token");
         var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
-        string user = jwt.Claims.First(c => c.Type == "exp").Value;
+        string user = jwt.Claims.First(c => c.Type == "id").Value;
         Jwt = user;
         foreach (var kriu in jwt.Claims)
         {
@@ -62,5 +65,21 @@
     {
         var localStorageCount = await localStorage.GetItemAsync<string>("count");
         Console.WriteLine($"Current Count = {localStorageCount}");
+    }
+
+    async Task ShowModal()
+    {
+        var confirmModal = Modal.Show<ConfirmationDialog>("Do Something?");
+
+        var modalResult = await confirmModal.Result;
+
+        if (modalResult.Cancelled == false)
+        {
+            Jwt = "Continued";
+        }
+        else
+        {
+            Jwt = "Canceled";
+        }
     }
 }

@@ -1,0 +1,27 @@
+﻿@page "/order"
+@page "/order/{id:int}"
+
+@inject NavigationManager NavigationManager
+
+@if(Id == null)
+{
+    <PageTitle>New Order</PageTitle>
+    <h3>Create a new order</h3>
+}
+else
+{
+    <PageTitle>Edit INSERT USERNAME HERE</PageTitle>
+    <h3>Edit SAME AS ABOVE</h3>
+}
+
+<button class="btn btn-primary" @onclick="GoToAllFurniture">Check included furniture</button>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    void GoToAllFurniture()
+    {
+        NavigationManager.NavigateTo($"/orders/{Id}/allfurniture");
+    }
+}

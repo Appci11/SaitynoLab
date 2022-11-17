@@ -1,4 +1,5 @@
 ﻿@page "/users"
+
 @inject IUsersService UsersService
 @inject NavigationManager NavigationManager
 @attribute [Authorize(Roles = "Admin")]
@@ -30,7 +31,7 @@
             }
         </tbody>
     </table>
-    <button class="btn btn-primary" @onclick="CreateNewUser">Create new user</button>
+    <button class="btn btn-primary" @onclick="CreateNewUser">Create a new user</button>
 }
 else
 {

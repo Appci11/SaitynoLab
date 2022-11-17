@@ -1,0 +1,76 @@
+﻿@page "/orders/{orderId:int}/allfurniture"
+
+@inject IFurnitureService FurnitureService
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+
+<PageTitle>All Furniture</PageTitle>
+
+<h3>All Furniture</h3>
+
+@if (Loaded)
+{
+    @if (FurnitureService.Furniture.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>OrderId</th>
+                    <th>Name</th>
+                    <th>To Assemble</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var furniture in FurnitureService.Furniture)
+                {
+                    <tr>
+                        <td>@furniture.Id</td>
+                        <td>@furniture.OrderId</td>
+                        <td>@furniture.Name</td>
+                        <td>@furniture.ToAssemble</td>
+                        <td><button class="btn btn-primary" @onclick="(() => ShowFurniture(furniture.Id))"><i class="oi oi-pencil"></i></button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>No furniture found</h2>
+    }
+}
+else
+{
+    <div class="loader">Loading...</div>
+}
+<AuthorizeView Roles="RegisteredUser">
+    <Authorized>
+        <button class="btn btn-primary" @onclick="CreateNewFurniture">Add new furniture</button>
+    </Authorized>
+    <NotAuthorized />
+</AuthorizeView>
+
+
+@code {
+    [Parameter]
+    public int OrderId { get; set; }
+    bool Loaded = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FurnitureService.GetAllFurniture(OrderId);
+        Loaded = true;
+    }
+
+    void ShowFurniture(int id)
+    {
+        NavigationManager.NavigateTo($"orders/{OrderId}/furniture/{id}");
+    }
+
+    void CreateNewFurniture()
+    {
+        NavigationManager.NavigateTo($"/orders/{OrderId}/furniture");
+    }
+}

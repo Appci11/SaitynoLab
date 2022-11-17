@@ -4,9 +4,9 @@
 @inject NavigationManager NavigationManager
 @attribute [Authorize]
 
-<PageTitle>All Furniture</PageTitle>
+<PageTitle>Furniture</PageTitle>
 
-<h3>All Furniture</h3>
+<h3>Order Nr @OrderId Furniture</h3>
 
 @if (Loaded)
 {
@@ -15,8 +15,14 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>OrderId</th>
+                    <th></th>
+                    <AuthorizeView Roles="Admin">
+                        <Authorized>
+                            <th>Id</th>
+                            <th>OrderId</th>
+                        </Authorized>
+                        <NotAuthorized />
+                    </AuthorizeView>
                     <th>Name</th>
                     <th>To Assemble</th>
                     <th></th>
@@ -26,8 +32,14 @@
                 @foreach (var furniture in FurnitureService.Furniture)
                 {
                     <tr>
-                        <td>@furniture.Id</td>
-                        <td>@furniture.OrderId</td>
+                        <td><img src="@furniture.ImageUrl" alt="furniture image" class="table-img" /></td>
+                        <AuthorizeView Roles="Admin">
+                            <Authorized>
+                                <td>@furniture.Id</td>
+                                <td>@furniture.OrderId</td>
+                            </Authorized>
+                            <NotAuthorized />
+                        </AuthorizeView>
                         <td>@furniture.Name</td>
                         <td>@furniture.ToAssemble</td>
                         <td><button class="btn btn-primary" @onclick="(() => ShowFurniture(furniture.Id))"><i class="oi oi-pencil"></i></button></td>

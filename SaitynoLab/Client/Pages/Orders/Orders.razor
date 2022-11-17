@@ -1,6 +1,6 @@
 ﻿@page "/orders"
 
-
+@inject ILocalStorageService localStorage
 @inject IOrdersService OrdersService
 @inject NavigationManager NavigationManager
 @attribute [Authorize]
@@ -16,8 +16,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>BuyerId</th>
+                    <th>Number</th>
+                    <AuthorizeView Roles="Admin">
+                        <Authorized>
+                            <th>BuyerId</th>
+                        </Authorized>
+                        <NotAuthorized />
+                    </AuthorizeView>
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Creation Date</th>
@@ -30,7 +35,12 @@
                 {
                     <tr>
                         <td>@order.Id</td>
-                        <td>@order.BuyerId</td>
+                        <AuthorizeView Roles="Admin">
+                            <Authorized>
+                                <td>@order.BuyerId</td>
+                            </Authorized>
+                            <NotAuthorized />
+                        </AuthorizeView>
                         <td>@order.Email</td>
                         <td>@order.PhoneNumber</td>
                         <td>@order.DateCreated</td>
@@ -61,9 +71,15 @@ else
 @code {
     bool Loaded = false;
 
+    int UserId = 0;
+
     protected override async Task OnInitializedAsync()
     {
         await OrdersService.GetOrders();
+        var token = await localStorage.GetItemAsync<string>("token");
+        var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+        string userId = jwt.Claims.First(c => c.Type == "id").Value;
+        UserId = int.Parse(userId);
         Loaded = true;
     }
 

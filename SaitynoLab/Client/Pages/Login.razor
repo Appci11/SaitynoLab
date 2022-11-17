@@ -26,7 +26,6 @@
     <div>
         Not a member? <a href="register">Register</a>
     </div>
-
 </body>
 
 @code {
@@ -43,7 +42,7 @@
 
     async Task HandleLogin()
     {
-        var result = await Http.PostAsJsonAsync("api/auth/login", user);
+        var result = await Http.PostAsJsonAsync($"api/auth/login", user);
         if (result.IsSuccessStatusCode)
         {
             var token = await result.Content.ReadAsStringAsync();
@@ -53,7 +52,7 @@
             NavigationManager.NavigateTo("");
         }
         if (result.StatusCode.Equals(404))
-    {
+        {
             ErrorMsg = "Incorrect username or password!";
         }
     }

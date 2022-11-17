@@ -28,9 +28,12 @@ builder.Services.AddAuthorizationCore(config =>
 });
 
 builder.Services.AddBlazoredModal();
+// pasalinus paskutini user'i refresh'o bug'as bet greiciau overall...
 builder.Services.AddScoped<IUsersService, UsersService>();
+// same story...
 builder.Services.AddScoped<IOrdersService, OrdersService>();
-builder.Services.AddScoped<IFurnitureService, FurnitureService>();
-builder.Services.AddScoped<IPartsService, PartsService>();
+// daznokai gali paskutinis pradingt - transient
+builder.Services.AddTransient<IFurnitureService, FurnitureService>();
+builder.Services.AddTransient<IPartsService, PartsService>();
 
 await builder.Build().RunAsync();

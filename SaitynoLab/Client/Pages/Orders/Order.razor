@@ -1,24 +1,103 @@
 ﻿@page "/order"
 @page "/order/{id:int}"
 
+@inject ILocalStorageService localStorage
 @inject NavigationManager NavigationManager
+@inject IOrdersService OrdersService
+@attribute [Authorize]
 
-@if(Id == null)
+@if (Id == null)
 {
     <PageTitle>New Order</PageTitle>
-    <h3>Create a new order</h3>
+    <h3>New Order</h3>
 }
 else
 {
-    <PageTitle>Edit INSERT USERNAME HERE</PageTitle>
-    <h3>Edit SAME AS ABOVE</h3>
+    <PageTitle>Edit Order</PageTitle>
+    <h3>Edit Order Nr @Id</h3>
 }
 
+<EditForm Model="order" OnSubmit="HandleSubmit">
+    <div>
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="order.Email" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="phoneNumber">Phone Number</label>
+        <InputText id="phoneNumber" @bind-Value="order.PhoneNumber" class="form-control"></InputText>
+    </div>
+    @if (Id != null)
+    {
+        <div>
+            <label for="isCompleted">Completed</label>
+            <select id="isCompleted" class="form-select" @bind="Completed">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+    }
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    @if (Id != null)
+    {
+        <button type="button" class="btn btn-danger" @onclick="DeleteUser">Delete</button>
+    }
+</EditForm>
+
+<br />
 <button class="btn btn-primary" @onclick="GoToAllFurniture">Check included furniture</button>
 
 @code {
     [Parameter]
     public int? Id { get; set; }
+
+    //nebereikia, bet gal dar pravers...
+    //private int UserId { get; set; } = 0;
+
+    string Completed = "true";
+
+    // Maisosi su situo order.razor...
+    SaitynoLab.Shared.Order order = new SaitynoLab.Shared.Order();
+
+    string btnText = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //var token = await localStorage.GetItemAsync<string>("token");
+        //var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+        //UserId = int.Parse(jwt.Claims.First(c => c.Type == "id").Value);
+
+        btnText = Id == null ? "Create new order" : "Edit order";
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id != null)
+        {
+            order = await OrdersService.GetSingleOrder((int)Id);
+        }
+    }
+
+    async Task HandleSubmit()
+    {
+        if (Id == null)
+        {
+            await OrdersService.CreateOrder(order);
+        }
+        else
+        {
+            order.IsCompleted = Completed.CompareTo("true") == 0;
+            await OrdersService.UpdateOrder(order);
+        }
+    }
+
+    async Task DeleteUser()
+    {
+        if (Id != null)
+        {
+            await OrdersService.DeleteOrder((int)Id);
+        }
+    }
 
     void GoToAllFurniture()
     {

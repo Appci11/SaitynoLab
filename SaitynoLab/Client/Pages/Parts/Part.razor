@@ -1,22 +1,102 @@
 ﻿@page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/part"
 @page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/part/{id:int}"
 
+@inject ILocalStorageService localStorage
+@inject NavigationManager NavigationManager
+@inject IPartsService PartsService
+@attribute [Authorize(Roles = "Admin")]
+
 @if (Id == null)
 {
-    <PageTitle>New Furniture</PageTitle>
-    <h3>Create a new furniture</h3>
+    <PageTitle>New Part</PageTitle>
+    <h3>Add a new part</h3>
 }
 else
 {
-    <PageTitle>Edit INSERT USERNAME HERE</PageTitle>
-    <h3>Edit SAME AS ABOVE</h3>
+    <PageTitle>Edit Part</PageTitle>
+    <h3>Edit Part Nr @Id</h3>
 }
+@*name, price, color*@
+<EditForm Model="part" OnSubmit="HandleSubmit">
+    <div>
+        <label for="name">Name</label>
+        <InputText id="name" @bind-Value="part.Name" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <InputText id="price" @bind-Value="Price" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="color">Color</label>
+        <select id="color" class="form-select" @bind="Color">
+            <option value="0">Red</option>
+            <option value="1">Green</option>
+            <option value="2">Blue</option>
+            <option value="3">Yellow</option>
+            <option value="4">Black</option>
+            <option value="5">White</option>
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    @if (Id != null)
+    {
+        <button type="button" class="btn btn-danger" @onclick="DeletePart">Delete</button>
+    }
+</EditForm>
 
 @code {
     [Parameter]
-    public int? OrderId { get; set; }
+    public int OrderId { get; set; }
     [Parameter]
-    public int? FurnitureId { get; set; }
+    public int FurnitureId { get; set; }
     [Parameter]
     public int? Id { get; set; }
+
+    string btnText = string.Empty;
+    string Price = string.Empty;
+    int Color = -1;
+
+    SaitynoLab.Shared.Part part = new SaitynoLab.Shared.Part();
+
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = Id == null ? "Create new part" : "Edit part";
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id != null)
+        {
+            part = await PartsService.GetSinglePart(OrderId, FurnitureId, (int)Id);
+            Price = part.Price.ToString();
+            Color = (int)part.Color;
+            Console.WriteLine(Color);
+        }
+    }
+
+    async Task HandleSubmit()
+    {
+        if (Id == null)
+        {
+            part.Price = double.Parse(Price);
+            part.Color = (PartColor)Color;
+            await PartsService.CreatePart(OrderId, FurnitureId, part);
+        }
+        else
+        {
+
+            part.Price = double.Parse(Price);
+            part.Color = (PartColor)Color;
+            await PartsService.UpdatePart(OrderId, FurnitureId, part);
+        }
+    }
+
+    async Task DeletePart()
+    {
+        if (Id != null)
+        {
+            await PartsService.DeletePart(OrderId, FurnitureId, (int)Id);
+        }
+    }
 }

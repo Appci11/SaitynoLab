@@ -2,11 +2,11 @@
 
 @inject IPartsService PartsService
 @inject NavigationManager NavigationManager
-@attribute [Authorize(Roles = "Admin")]
+@attribute [Authorize]
 
 <PageTitle>Parts</PageTitle>
 
-<h3>Parts</h3>
+<h3>Furniture Nr @FurnitureId Parts</h3>
 
 @if (Loaded)
 {
@@ -15,26 +15,47 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Order Id</th>
-                    <th>Furniture Id</th>
+                    <AuthorizeView Roles="Admin">
+                        <Authorized>
+                            <th>Id</th>
+                            <th>Order Id</th>
+                            <th>Furniture Id</th>
+                        </Authorized>
+                        <NotAuthorized />
+                    </AuthorizeView>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Colour</th>
-                    <th></th>
+                    <AuthorizeView Roles="Admin">
+                        <Authorized>
+                            <th></th>
+                        </Authorized>
+                        <NotAuthorized />
+                    </AuthorizeView>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach (var part in PartsService.Parts)
                 {
                     <tr>
-                        <td>@part.Id</td>
-                        <td>@OrderId</td>
-                        <td>@FurnitureId</td>
+                        <AuthorizeView Roles="Admin">
+                            <Authorized>
+                                <td>@part.Id</td>
+                                <td>@OrderId</td>
+                                <td>@FurnitureId</td>
+                            </Authorized>
+                            <NotAuthorized />
+                        </AuthorizeView>
                         <td>@part.Name</td>
                         <td>@part.Price</td>
                         <td>@part.Color</td>
-                        <td><button class="btn btn-primary" @onclick="(() => ShowPart(part.Id))"><i class="oi oi-pencil"></i></button></td>
+                        <AuthorizeView Roles="Admin">
+                            <Authorized>
+                                <td><button class="btn btn-primary" @onclick="(() => ShowPart(part.Id))"><i class="oi oi-pencil"></i></button></td>
+                            </Authorized>
+                            <NotAuthorized />
+                        </AuthorizeView>
                     </tr>
                 }
             </tbody>
@@ -49,8 +70,12 @@ else
 {
     <div class="loader">Loading...</div>
 }
-<button class="btn btn-primary" @onclick="CreateNewPart">Add new part</button>
-
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <button class="btn btn-primary" @onclick="CreateNewPart">Add a new part</button>
+    </Authorized>
+    <NotAuthorized />
+</AuthorizeView>
 
 @code {
     [Parameter]

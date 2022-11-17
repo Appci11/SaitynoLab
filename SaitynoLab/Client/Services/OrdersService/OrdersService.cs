@@ -16,14 +16,18 @@ namespace SaitynoLab.Client.Services.OrdersService
 
         public List<Order> Orders { get; set; } = new List<Order>();
 
-        public Task CreateOrder(Order order)
+        public async Task CreateOrder(Order order)
         {
-            throw new NotImplementedException();
+            var result = await _http.PostAsJsonAsync($"/api/orders", order);
+            //await GetOrders();
+            _navigationManager.NavigateTo($"/orders");
         }
 
-        public Task DeleteOrder(int id)
+        public async Task DeleteOrder(int id)
         {
-            throw new NotImplementedException();
+            var result = await _http.DeleteAsync($"/api/orders/{id}");
+            //await GetOrders();
+            _navigationManager.NavigateTo($"/orders");
         }
 
         public async Task GetOrders()
@@ -31,7 +35,7 @@ namespace SaitynoLab.Client.Services.OrdersService
             List<Order> result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<List<Order>>("api/orders");
+                result = await _http.GetFromJsonAsync<List<Order>>($"api/orders");
             }
             catch (Exception e) { };
             if (result != null)
@@ -40,14 +44,22 @@ namespace SaitynoLab.Client.Services.OrdersService
             }
         }
 
-        public Task<Order> GetSingleOrder(int id)
+        public async Task<Order> GetSingleOrder(int id)
         {
-            throw new NotImplementedException();
+            Order result = null;
+            try
+            {
+                result = await _http.GetFromJsonAsync<Order>($"api/orders/{id}");
+            }
+            catch (Exception e) { };
+            return result;
         }
 
-        public Task UpdateOrder(Order order)
+        public async Task UpdateOrder(Order order)
         {
-            throw new NotImplementedException();
+            var result = await _http.PutAsJsonAsync($"/api/orders/{order.Id}", order);
+            //await GetOrders();
+            _navigationManager.NavigateTo($"/orders");
         }
     }
 }

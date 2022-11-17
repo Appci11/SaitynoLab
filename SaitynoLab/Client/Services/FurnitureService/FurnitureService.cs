@@ -19,12 +19,16 @@ namespace SaitynoLab.Client.Services.FurnitureService
 
         public async Task CreateFurniture(int orderId, Furniture furniture)
         {
-            throw new NotImplementedException();
+            var result = await _http.PostAsJsonAsync($"api/orders/{orderId}/furniture", furniture);
+            //await GetAllFurniture(orderId);
+            _navigationManager.NavigateTo($"orders/{orderId}/allfurniture");
         }
 
         public async Task DeleteFurniture(int orderId, int id)
         {
-            throw new NotImplementedException();
+            var result = await _http.DeleteAsync($"api/orders/{orderId}/furniture/{id}");
+            //await GetAllFurniture(orderId);
+            _navigationManager.NavigateTo($"/orders/{orderId}/allfurniture");
         }
 
         public async Task GetAllFurniture(int orderId)
@@ -32,7 +36,7 @@ namespace SaitynoLab.Client.Services.FurnitureService
             List<Furniture> result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<List<Furniture>>($"api/orders/{orderId}/furniture");
+                result = await _http.GetFromJsonAsync<List<Furniture>>($"/api/orders/{orderId}/furniture");
             }
             catch (Exception e) { };
             if (result != null)
@@ -43,12 +47,20 @@ namespace SaitynoLab.Client.Services.FurnitureService
 
         public async Task<Furniture> GetSingleFurniture(int orderId, int id)
         {
-            throw new NotImplementedException();
+            Furniture result = null;
+            try
+            {
+                result = await _http.GetFromJsonAsync<Furniture>($"/api/orders/{orderId}/furniture/{id}");
+            }
+            catch(Exception e) { };
+            return result;
         }
 
         public async Task UpdateFurniture(int orderId, Furniture furniture)
         {
-            throw new NotImplementedException();
+            var result = await _http.PutAsJsonAsync($"/api/orders/{orderId}/furniture/{furniture.Id}", furniture);
+            //await GetAllFurniture(orderId);
+            _navigationManager.NavigateTo($"/orders/{orderId}/allfurniture");
         }
     }
 }

@@ -47,8 +47,8 @@
     {
         var token = await localStorage.GetItemAsync<string>("token");
         var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
-        string user = jwt.Claims.First(c => c.Type == "id").Value;
-        Jwt = user;
+        string userId = jwt.Claims.First(c => c.Type == "id").Value;
+        Jwt = userId;
         foreach (var kriu in jwt.Claims)
         {
             Console.WriteLine(kriu);

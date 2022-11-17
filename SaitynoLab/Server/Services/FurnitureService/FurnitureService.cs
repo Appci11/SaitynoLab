@@ -27,6 +27,7 @@ namespace SaitynoLab.Server.Services.FurnitureService
             Furniture furniture = new();
             furniture.OrderId = orderId;
             furniture.Name = furnitureCreateDto.Name;
+            furniture.ImageUrl = furnitureCreateDto.ImageUrl;
             furniture.ToAssemble = furnitureCreateDto.ToAssemble;
             _context.Furniture.Add(furniture);
             await _context.SaveChangesAsync();
@@ -87,6 +88,7 @@ namespace SaitynoLab.Server.Services.FurnitureService
                 return null;
             }
             dbFurniture.Name = furnitureUpdateDto.Name;
+            dbFurniture.ImageUrl = furnitureUpdateDto.ImageUrl;
             dbFurniture.ToAssemble = furnitureUpdateDto.ToAssemble;
             await _context.SaveChangesAsync();
             return dbFurniture;

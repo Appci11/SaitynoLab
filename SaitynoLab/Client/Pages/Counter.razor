@@ -49,10 +49,6 @@
         var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
         string userId = jwt.Claims.First(c => c.Type == "id").Value;
         Jwt = userId;
-        foreach (var kriu in jwt.Claims)
-        {
-            Console.WriteLine(kriu);
-        }
     }
 
     private async Task IncrementCount()

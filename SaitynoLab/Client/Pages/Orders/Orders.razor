@@ -11,51 +11,20 @@
 
 @if (Loaded)
 {
-    @if (OrdersService.Orders.Count > 0)
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Number</th>
-                    <AuthorizeView Roles="Admin">
-                        <Authorized>
-                            <th>BuyerId</th>
-                        </Authorized>
-                        <NotAuthorized />
-                    </AuthorizeView>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Creation Date</th>
-                    <th>Completed</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var order in OrdersService.Orders)
-                {
-                    <tr>
-                        <td>@order.Id</td>
-                        <AuthorizeView Roles="Admin">
-                            <Authorized>
-                                <td>@order.BuyerId</td>
-                            </Authorized>
-                            <NotAuthorized />
-                        </AuthorizeView>
-                        <td>@order.Email</td>
-                        <td>@order.PhoneNumber</td>
-                        <td>@order.DateCreated</td>
-                        <td>@order.IsCompleted</td>
-                        <td><button class="btn btn-primary" @onclick="(() => ShowOrder(order.Id))"><i class="oi oi-pencil"></i></button></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <h2>No orders found</h2>
-    }
+    <AuthorizeView Roles="Admin">
+        <Authorized>
+            <OrdersTableForAdmin Orders="@OrdersService.Orders"></OrdersTableForAdmin>
+        </Authorized>
+        <NotAuthorized />            
+    </AuthorizeView>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <OrdersTableForUser Orders="@OrdersService.Orders"></OrdersTableForUser>
+        </Authorized>
+        <NotAuthorized />
+    </AuthorizeView>
 }
+
 else
 {
     <div class="loader">Loading...</div>

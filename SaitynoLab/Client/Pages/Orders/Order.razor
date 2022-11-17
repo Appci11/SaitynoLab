@@ -51,8 +51,7 @@ else
     [Parameter]
     public int? Id { get; set; }
 
-    //nebereikia, bet gal dar pravers...
-    //private int UserId { get; set; } = 0;
+    private int UserId { get; set; } = 0;
 
     string Completed = "true";
 
@@ -63,9 +62,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //var token = await localStorage.GetItemAsync<string>("token");
-        //var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
-        //UserId = int.Parse(jwt.Claims.First(c => c.Type == "id").Value);
+        var token = await localStorage.GetItemAsync<string>("token");
+        var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+        UserId = int.Parse(jwt.Claims.First(c => c.Type == "id").Value);
 
         btnText = Id == null ? "Create new order" : "Edit order";
     }
@@ -82,6 +81,7 @@ else
     {
         if (Id == null)
         {
+            order.BuyerId = UserId;
             await OrdersService.CreateOrder(order);
         }
         else

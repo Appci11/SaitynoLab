@@ -1,0 +1,62 @@
+﻿@inject ILocalStorageService localStorage
+@inject NavigationManager NavigationManager
+
+@if (Orders.Count > 0 && n > 0)
+{
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order Nr</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Completed</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var order in Orders)
+            {
+                if (order.BuyerId == UserId)
+                {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.Email</td>
+                            <td>@order.PhoneNumber</td>
+                            <td>@order.IsCompleted</td>
+                            <td><button class="btn btn-primary" @onclick="(() => ShowOrder(order.Id))"><i class="oi oi-pencil"></i></button></td>
+                        </tr>
+                }
+            }
+            </tbody>
+        </table>
+}
+else
+{
+        <h2>You do not appear to have placed any orders.</h2>
+}
+
+
+@code {
+    [Parameter]
+    public List<SaitynoLab.Shared.Order> Orders { get; set; }
+
+    int UserId;
+    int n = 0;  //gudriau reiketu, bet...
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await localStorage.GetItemAsync<string>("token");
+        var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+        string userId = jwt.Claims.First(c => c.Type == "id").Value;
+        UserId = int.Parse(userId);
+        foreach (var order in Orders)
+        {
+            if (order.BuyerId == UserId) n++;
+        }
+    }
+
+    void ShowOrder(int id)
+    {
+        NavigationManager.NavigateTo($"order/{id}");
+    }
+}

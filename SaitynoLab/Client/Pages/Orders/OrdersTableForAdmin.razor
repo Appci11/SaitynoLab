@@ -1,0 +1,47 @@
+﻿@inject NavigationManager NavigationManager
+
+@if (Orders.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>BuyerId</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Creation Date</th>
+                <th>Completed</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.BuyerId</td>
+                    <td>@order.Email</td>
+                    <td>@order.PhoneNumber</td>
+                    <td>@order.DateCreated</td>
+                    <td>@order.IsCompleted</td>
+                    <td><button class="btn btn-primary" @onclick="(() => ShowOrder(order.Id))"><i class="oi oi-pencil"></i></button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>No orders found</h2>
+}
+
+
+@code {
+    [Parameter]
+    public List<SaitynoLab.Shared.Order> Orders { get; set; }
+
+    void ShowOrder(int id)
+    {
+        NavigationManager.NavigateTo($"order/{id}");
+    }
+}

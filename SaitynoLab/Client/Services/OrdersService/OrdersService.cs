@@ -20,14 +20,14 @@ namespace SaitynoLab.Client.Services.OrdersService
         {
             var result = await _http.PostAsJsonAsync($"{Settings.Url}/api/orders", order);
             //await GetOrders();
-            _navigationManager.NavigateTo($"/orders");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders");
         }
 
         public async Task DeleteOrder(int id)
         {
             var result = await _http.DeleteAsync($"{Settings.Url}/api/orders/{id}");
             //await GetOrders();
-            _navigationManager.NavigateTo($"/orders");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders");
         }
 
         public async Task GetOrders()
@@ -59,7 +59,7 @@ namespace SaitynoLab.Client.Services.OrdersService
         {
             var result = await _http.PutAsJsonAsync($"{Settings.Url}/api/orders/{order.Id}", order);
             //await GetOrders();
-            _navigationManager.NavigateTo($"/orders");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders");
         }
     }
 }

@@ -18,13 +18,13 @@ namespace SaitynoLab.Client.Services.PartsService
         public async Task CreatePart(int orderId, int furnitureId, Part part)
         {
             var result = await _http.PostAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts", part);
-            _navigationManager.NavigateTo($"orders/{orderId}/allfurniture/{furnitureId}/parts");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders/{orderId}/allfurniture/{furnitureId}/parts");
         }
 
         public async Task DeletePart(int orderId, int furnitureId, int id)
         {
             var result = await _http.DeleteAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts/{id}");
-            _navigationManager.NavigateTo($"orders/{orderId}/allfurniture/{furnitureId}/parts");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders/{orderId}/allfurniture/{furnitureId}/parts");
         }
 
         public async Task GetParts(int orderId, int furnitureId)
@@ -55,7 +55,7 @@ namespace SaitynoLab.Client.Services.PartsService
         public async Task UpdatePart(int orderId, int furnitureId, Part part)
         {
             var result = await _http.PutAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts/{part.Id}", part);
-            _navigationManager.NavigateTo($"orders/{orderId}/allfurniture/{furnitureId}/parts");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders/{orderId}/allfurniture/{furnitureId}/parts");
         }
     }
 }

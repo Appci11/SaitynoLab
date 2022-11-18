@@ -1,4 +1,5 @@
 ﻿@page "/orders"
+@page "/rolka114/orders"
 
 @inject ILocalStorageService localStorage
 @inject IOrdersService OrdersService
@@ -54,11 +55,11 @@ else
 
     void ShowOrder(int id)
     {
-        NavigationManager.NavigateTo($"order/{id}");
+        NavigationManager.NavigateTo($"{Settings.Url2}/order/{id}");
     }
 
     void CreateNewOrder()
     {
-        NavigationManager.NavigateTo("/order");
+        NavigationManager.NavigateTo($"{Settings.Url2}/order");
     }
 }

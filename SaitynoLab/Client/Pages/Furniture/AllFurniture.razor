@@ -1,4 +1,5 @@
 ﻿@page "/orders/{orderId:int}/allfurniture"
+@page "/rolka114/orders/{orderId:int}/allfurniture"
 
 @inject IFurnitureService FurnitureService
 @inject NavigationManager NavigationManager
@@ -78,11 +79,11 @@ else
 
     void ShowFurniture(int id)
     {
-        NavigationManager.NavigateTo($"orders/{OrderId}/furniture/{id}");
+        NavigationManager.NavigateTo($"{Settings.Url2}/orders/{OrderId}/furniture/{id}");
     }
 
     void CreateNewFurniture()
     {
-        NavigationManager.NavigateTo($"/orders/{OrderId}/furniture");
+        NavigationManager.NavigateTo($"{Settings.Url2}/orders/{OrderId}/furniture");
     }
 }

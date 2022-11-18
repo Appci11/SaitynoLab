@@ -1,4 +1,5 @@
 ﻿@page "/users"
+@page "/rolka114/users"
 
 @inject IUsersService UsersService
 @inject NavigationManager NavigationManager
@@ -50,11 +51,11 @@ else
 
     void ShowUser(int id)
     {
-        NavigationManager.NavigateTo($"user/{id}");
+        NavigationManager.NavigateTo($"{Settings.Url2}/user/{id}");
     }
 
     void CreateNewUser()
     {
-        NavigationManager.NavigateTo("/user");
+        NavigationManager.NavigateTo($"{Settings.Url2}/user");
     }
 }

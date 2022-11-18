@@ -1,4 +1,5 @@
 ﻿@page "/register"
+@page "/rolka114/register"
 
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
@@ -49,7 +50,7 @@
             if (result.IsSuccessStatusCode)
             {
                 ErrorMsg = string.Empty;
-                NavigationManager.NavigateTo("");
+                NavigationManager.NavigateTo("{Settings.Url2}/");
             }
             if (result.StatusCode.Equals(404))
             {

@@ -1,4 +1,5 @@
 ﻿@page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/parts"
+@page "/rolka114/orders/{orderId:int}/allfurniture/{furnitureId:int}/parts"
 
 @inject IPartsService PartsService
 @inject NavigationManager NavigationManager
@@ -92,11 +93,11 @@ else
 
     void ShowPart(int id)
     {
-        NavigationManager.NavigateTo($"/orders/{OrderId}/allfurniture/{FurnitureId}/part/{id}");
+        NavigationManager.NavigateTo($"{Settings.Url2}/orders/{OrderId}/allfurniture/{FurnitureId}/part/{id}");
     }
 
     void CreateNewPart()
     {
-        NavigationManager.NavigateTo($"/orders/{OrderId}/allfurniture/{FurnitureId}/part");
+        NavigationManager.NavigateTo($"{Settings.Url2}/orders/{OrderId}/allfurniture/{FurnitureId}/part");
     }
 }

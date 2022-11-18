@@ -21,14 +21,14 @@ namespace SaitynoLab.Client.Services.FurnitureService
         {
             var result = await _http.PostAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture", furniture);
             //await GetAllFurniture(orderId);
-            _navigationManager.NavigateTo($"orders/{orderId}/allfurniture");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders/{orderId}/allfurniture");
         }
 
         public async Task DeleteFurniture(int orderId, int id)
         {
             var result = await _http.DeleteAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{id}");
             //await GetAllFurniture(orderId);
-            _navigationManager.NavigateTo($"/orders/{orderId}/allfurniture");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders/{orderId}/allfurniture");
         }
 
         public async Task GetAllFurniture(int orderId)
@@ -60,7 +60,7 @@ namespace SaitynoLab.Client.Services.FurnitureService
         {
             var result = await _http.PutAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furniture.Id}", furniture);
             //await GetAllFurniture(orderId);
-            _navigationManager.NavigateTo($"/orders/{orderId}/allfurniture");
+            _navigationManager.NavigateTo($"{Settings.Url2}/orders/{orderId}/allfurniture");
         }
     }
 }

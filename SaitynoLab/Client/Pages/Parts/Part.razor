@@ -1,8 +1,9 @@
 ﻿@page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/part"
 @page "/orders/{orderId:int}/allfurniture/{furnitureId:int}/part/{id:int}"
+@page "/rolka114/orders/{orderId:int}/allfurniture/{furnitureId:int}/part"
+@page "/rolka114/orders/{orderId:int}/allfurniture/{furnitureId:int}/part/{id:int}"
 
 @inject ILocalStorageService localStorage
-@inject NavigationManager NavigationManager
 @inject IPartsService PartsService
 @attribute [Authorize(Roles = "Admin")]
 
@@ -24,7 +25,7 @@ else
     </div>
     <div>
         <label for="price">Price</label>
-        <InputText id="price" @bind-Value="Price" class="form-control"></InputText>
+        <InputText id="price" @bind-Value="Price" class="form-control" type="number"></InputText>
     </div>
     <div>
         <label for="color">Color</label>

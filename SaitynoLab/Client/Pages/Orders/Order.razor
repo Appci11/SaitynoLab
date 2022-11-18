@@ -1,5 +1,7 @@
 ﻿@page "/order"
 @page "/order/{id:int}"
+@page "/rolka114/order"
+@page "/rolka114/order/{id:int}"
 
 @inject ILocalStorageService localStorage
 @inject NavigationManager NavigationManager
@@ -121,6 +123,6 @@ else
 
     void GoToAllFurniture()
     {
-        NavigationManager.NavigateTo($"/orders/{Id}/allfurniture");
+        NavigationManager.NavigateTo($"{Settings.Url2}/orders/{Id}/allfurniture");
     }
 }

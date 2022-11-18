@@ -1,5 +1,7 @@
 ﻿@page "/orders/{orderId:int}/furniture"
 @page "/orders/{orderId:int}/furniture/{id:int}"
+@page "/rolka114/orders/{orderId:int}/furniture"
+@page "/rolka114/orders/{orderId:int}/furniture/{id:int}"
 
 @inject ILocalStorageService localStorage
 @inject NavigationManager NavigationManager
@@ -112,6 +114,6 @@ else
 
     void GoToParts()
     {
-        NavigationManager.NavigateTo($"/orders/{OrderId}/allfurniture/{Id}/parts");
+        NavigationManager.NavigateTo($"{Settings.Url2}/orders/{OrderId}/allfurniture/{Id}/parts");
     }
 }

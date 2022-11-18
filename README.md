@@ -44,4 +44,4 @@ Backend‘ą, priklausomai nuo poreikio, galime skirstyti ir į daugiau dalių (
 
 Sistemos architektūra pavaizduota paveikslėlyje pav. 2.1.
 
-![N|Solid](https://drive.google.com/uc?export=view&id=1YAAHpneoCY6VrC6KF0ps1E-b_2FNwhBY)
+![Kriu](https://drive.google.com/uc?export=view&id=1YAAHpneoCY6VrC6KF0ps1E-b_2FNwhBY)

@@ -18,21 +18,21 @@ namespace SaitynoLab.Client.Services.UsersService
 
         public async Task CreateUser(User user)
         {
-            var result = await _http.PostAsJsonAsync($"/api/users", user);
+            var result = await _http.PostAsJsonAsync($"{Settings.Url}/api/users", user);
             //await GetUsers();  //kazi ar bereikia, iejus i /users turetu ir taip pasileist
             _navigationManager.NavigateTo($"/users");
         }
 
         public async Task DeleteUser(int id)
         {
-            var result = await _http.DeleteAsync($"api/users/{id}");
+            var result = await _http.DeleteAsync($"{Settings.Url}/api/users/{id}");
             //await GetUsers();
             _navigationManager.NavigateTo($"/users");
         }
 
         public async Task<User> GetSingleUser(int id)
         {
-            var result = await _http.GetFromJsonAsync<User>($"/api/users/{id}");
+            var result = await _http.GetFromJsonAsync<User>($"{Settings.Url}/api/users/{id}");
             if (result != null)
             {
                 return result;
@@ -42,8 +42,8 @@ namespace SaitynoLab.Client.Services.UsersService
 
         public async Task GetUsers()
         {
-            var result = await _http.GetFromJsonAsync<List<User>>($"/api/users");
-            if(result != null)
+            var result = await _http.GetFromJsonAsync<List<User>>($"{Settings.Url}/api/users");
+            if (result != null)
             {
                 Users = result;
             }
@@ -51,7 +51,7 @@ namespace SaitynoLab.Client.Services.UsersService
 
         public async Task UpdateUser(User user)
         {
-            var result = await _http.PutAsJsonAsync($"/api/users/{user.Id}", user);
+            var result = await _http.PutAsJsonAsync($"{Settings.Url}/api/users/{user.Id}", user);
             //await GetUsers();
             _navigationManager.NavigateTo($"/users");
         }

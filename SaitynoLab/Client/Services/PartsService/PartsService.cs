@@ -17,13 +17,13 @@ namespace SaitynoLab.Client.Services.PartsService
 
         public async Task CreatePart(int orderId, int furnitureId, Part part)
         {
-            var result = await _http.PostAsJsonAsync($"api/orders/{orderId}/furniture/{furnitureId}/parts", part);
+            var result = await _http.PostAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts", part);
             _navigationManager.NavigateTo($"orders/{orderId}/allfurniture/{furnitureId}/parts");
         }
 
         public async Task DeletePart(int orderId, int furnitureId, int id)
         {
-            var result = await _http.DeleteAsync($"api/orders/{orderId}/furniture/{furnitureId}/parts/{id}");
+            var result = await _http.DeleteAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts/{id}");
             _navigationManager.NavigateTo($"orders/{orderId}/allfurniture/{furnitureId}/parts");
         }
 
@@ -32,7 +32,7 @@ namespace SaitynoLab.Client.Services.PartsService
             List<Part> result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<List<Part>>($"api/orders/{orderId}/furniture/{furnitureId}/parts");
+                result = await _http.GetFromJsonAsync<List<Part>>($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts");
             }
             catch (Exception e) { };
             if (result != null)
@@ -46,7 +46,7 @@ namespace SaitynoLab.Client.Services.PartsService
             Part result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<Part>($"/api/orders/{orderId}/furniture/{furnitureId}/parts/{id}");
+                result = await _http.GetFromJsonAsync<Part>($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts/{id}");
             }
             catch (Exception e) { };
             return result;
@@ -54,7 +54,7 @@ namespace SaitynoLab.Client.Services.PartsService
 
         public async Task UpdatePart(int orderId, int furnitureId, Part part)
         {
-            var result = await _http.PutAsJsonAsync($"/api/orders/{orderId}/furniture/{furnitureId}/parts/{part.Id}", part);
+            var result = await _http.PutAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furnitureId}/parts/{part.Id}", part);
             _navigationManager.NavigateTo($"orders/{orderId}/allfurniture/{furnitureId}/parts");
         }
     }

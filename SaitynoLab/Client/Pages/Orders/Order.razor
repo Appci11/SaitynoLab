@@ -40,7 +40,7 @@ else
     <button type="submit" class="btn btn-primary">@btnText</button>
     @if (Id != null)
     {
-        <button type="button" class="btn btn-danger" @onclick="DeleteUser">Delete</button>
+        <button type="button" class="btn btn-danger" @onclick="ShowModal">Delete</button>
     }
 </EditForm>
 
@@ -48,12 +48,16 @@ else
 <button class="btn btn-primary" @onclick="GoToAllFurniture">Check included furniture</button>
 
 @code {
+
     [Parameter]
     public int? Id { get; set; }
+
+    [CascadingParameter] IModalService Modal { get; set; }
 
     private int UserId { get; set; } = 0;
 
     string Completed = "true";
+    bool IsAdmin = false;
 
     // Maisosi su situo order.razor...
     SaitynoLab.Shared.Order order = new SaitynoLab.Shared.Order();
@@ -65,7 +69,6 @@ else
         var token = await localStorage.GetItemAsync<string>("token");
         var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
         UserId = int.Parse(jwt.Claims.First(c => c.Type == "id").Value);
-
         btnText = Id == null ? "Create new order" : "Edit order";
     }
 
@@ -91,11 +94,28 @@ else
         }
     }
 
-    async Task DeleteUser()
+    async Task DeleteOrder()
     {
         if (Id != null)
         {
             await OrdersService.DeleteOrder((int)Id);
+        }
+    }
+
+    async Task ShowModal()
+    {
+        var confirmModal = Modal.Show<ConfirmationDialog>("Delete Selected Item?");
+
+        var modalResult = await confirmModal.Result;
+
+        if (modalResult.Cancelled == false)
+        {
+            await DeleteOrder();
+            Console.WriteLine("Deleted");
+        }
+        else
+        {
+            Console.WriteLine("Action cancelled");
         }
     }
 

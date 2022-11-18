@@ -41,7 +41,7 @@ else
     <button type="submit" class="btn btn-primary">@btnText</button>
     @if (Id != null)
     {
-        <button type="button" class="btn btn-danger" @onclick="DeletePart">Delete</button>
+        <button type="button" class="btn btn-danger" @onclick="ShowModal">Delete</button>
     }
 </EditForm>
 
@@ -52,6 +52,8 @@ else
     public int FurnitureId { get; set; }
     [Parameter]
     public int? Id { get; set; }
+
+    [CascadingParameter] IModalService Modal { get; set; }
 
     string btnText = string.Empty;
     string Price = string.Empty;
@@ -97,6 +99,23 @@ else
         if (Id != null)
         {
             await PartsService.DeletePart(OrderId, FurnitureId, (int)Id);
+        }
+    }
+
+    async Task ShowModal()
+    {
+        var confirmModal = Modal.Show<ConfirmationDialog>("Delete Selected Item?");
+
+        var modalResult = await confirmModal.Result;
+
+        if (modalResult.Cancelled == false)
+        {
+            await DeletePart();
+            Console.WriteLine("Deleted");
+        }
+        else
+        {
+            Console.WriteLine("Action cancelled");
         }
     }
 }

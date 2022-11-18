@@ -19,14 +19,14 @@ namespace SaitynoLab.Client.Services.FurnitureService
 
         public async Task CreateFurniture(int orderId, Furniture furniture)
         {
-            var result = await _http.PostAsJsonAsync($"api/orders/{orderId}/furniture", furniture);
+            var result = await _http.PostAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture", furniture);
             //await GetAllFurniture(orderId);
             _navigationManager.NavigateTo($"orders/{orderId}/allfurniture");
         }
 
         public async Task DeleteFurniture(int orderId, int id)
         {
-            var result = await _http.DeleteAsync($"api/orders/{orderId}/furniture/{id}");
+            var result = await _http.DeleteAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{id}");
             //await GetAllFurniture(orderId);
             _navigationManager.NavigateTo($"/orders/{orderId}/allfurniture");
         }
@@ -36,7 +36,7 @@ namespace SaitynoLab.Client.Services.FurnitureService
             List<Furniture> result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<List<Furniture>>($"/api/orders/{orderId}/furniture");
+                result = await _http.GetFromJsonAsync<List<Furniture>>($"{Settings.Url}/api/orders/{orderId}/furniture");
             }
             catch (Exception e) { };
             if (result != null)
@@ -50,7 +50,7 @@ namespace SaitynoLab.Client.Services.FurnitureService
             Furniture result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<Furniture>($"/api/orders/{orderId}/furniture/{id}");
+                result = await _http.GetFromJsonAsync<Furniture>($"{Settings.Url}/api/orders/{orderId}/furniture/{id}");
             }
             catch(Exception e) { };
             return result;
@@ -58,7 +58,7 @@ namespace SaitynoLab.Client.Services.FurnitureService
 
         public async Task UpdateFurniture(int orderId, Furniture furniture)
         {
-            var result = await _http.PutAsJsonAsync($"/api/orders/{orderId}/furniture/{furniture.Id}", furniture);
+            var result = await _http.PutAsJsonAsync($"{Settings.Url}/api/orders/{orderId}/furniture/{furniture.Id}", furniture);
             //await GetAllFurniture(orderId);
             _navigationManager.NavigateTo($"/orders/{orderId}/allfurniture");
         }

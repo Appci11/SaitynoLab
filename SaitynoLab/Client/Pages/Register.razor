@@ -16,7 +16,7 @@
             <label for="password">Password</label>
         </div>
         <div>
-            <InputText id="password2" @bind-Value="Pass2" type="password" @onkeyup="HandleRegister" />
+            <InputText id="password2" @bind-Value="Pass2" type="password" />
             <label for="password2">Repeat Password</label>
         </div>
         <div>
@@ -45,7 +45,7 @@
     {
         if (Pass2.CompareTo(user.Password) == 0)
         {
-            var result = await Http.PostAsJsonAsync($"api/auth/register", user);
+            var result = await Http.PostAsJsonAsync($"{Settings.Url}/api/auth/register", user);
             if (result.IsSuccessStatusCode)
             {
                 ErrorMsg = string.Empty;

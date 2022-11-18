@@ -15,13 +15,13 @@
         <Authorized>
             <OrdersTableForAdmin Orders="@OrdersService.Orders"></OrdersTableForAdmin>
         </Authorized>
-        <NotAuthorized />            
+        <NotAuthorized></NotAuthorized>
     </AuthorizeView>
-    <AuthorizeView Roles="User">
+    <AuthorizeView Roles="RegisteredUser">
         <Authorized>
             <OrdersTableForUser Orders="@OrdersService.Orders"></OrdersTableForUser>
         </Authorized>
-        <NotAuthorized />
+        <NotAuthorized></NotAuthorized>
     </AuthorizeView>
 }
 

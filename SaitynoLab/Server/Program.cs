@@ -56,6 +56,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Policy1", builder =>
+     builder.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -82,7 +90,7 @@ app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseCors("Policy1");
 app.UseAuthentication();
 app.UseAuthorization();
 

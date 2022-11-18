@@ -18,14 +18,14 @@ namespace SaitynoLab.Client.Services.OrdersService
 
         public async Task CreateOrder(Order order)
         {
-            var result = await _http.PostAsJsonAsync($"/api/orders", order);
+            var result = await _http.PostAsJsonAsync($"{Settings.Url}/api/orders", order);
             //await GetOrders();
             _navigationManager.NavigateTo($"/orders");
         }
 
         public async Task DeleteOrder(int id)
         {
-            var result = await _http.DeleteAsync($"/api/orders/{id}");
+            var result = await _http.DeleteAsync($"{Settings.Url}/api/orders/{id}");
             //await GetOrders();
             _navigationManager.NavigateTo($"/orders");
         }
@@ -35,7 +35,7 @@ namespace SaitynoLab.Client.Services.OrdersService
             List<Order> result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<List<Order>>($"api/orders");
+                result = await _http.GetFromJsonAsync<List<Order>>($"{Settings.Url}/api/orders");
             }
             catch (Exception e) { };
             if (result != null)
@@ -49,7 +49,7 @@ namespace SaitynoLab.Client.Services.OrdersService
             Order result = null;
             try
             {
-                result = await _http.GetFromJsonAsync<Order>($"api/orders/{id}");
+                result = await _http.GetFromJsonAsync<Order>($"{Settings.Url}/api/orders/{id}");
             }
             catch (Exception e) { };
             return result;
@@ -57,7 +57,7 @@ namespace SaitynoLab.Client.Services.OrdersService
 
         public async Task UpdateOrder(Order order)
         {
-            var result = await _http.PutAsJsonAsync($"/api/orders/{order.Id}", order);
+            var result = await _http.PutAsJsonAsync($"{Settings.Url}/api/orders/{order.Id}", order);
             //await GetOrders();
             _navigationManager.NavigateTo($"/orders");
         }

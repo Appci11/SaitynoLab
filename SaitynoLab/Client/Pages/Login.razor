@@ -13,7 +13,7 @@
             <label for="username">Name</label>
         </div>
         <div>
-            <InputText id="password" @bind-Value="user.Password" type="password" @onkeyup="HandleLogin" />
+            <InputText id="password" @bind-Value="user.Password" type="password" />
             <label for="password">Password</label>
         </div>
         <div>
@@ -42,7 +42,7 @@
 
     async Task HandleLogin()
     {
-        var result = await Http.PostAsJsonAsync($"api/auth/login", user);
+        var result = await Http.PostAsJsonAsync($"{Settings.Url}/api/auth/login", user);
         if (result.IsSuccessStatusCode)
         {
             var token = await result.Content.ReadAsStringAsync();
@@ -51,7 +51,7 @@
             ErrorMsg = string.Empty;
             NavigationManager.NavigateTo("");
         }
-        if (result.StatusCode.Equals(404))
+        else
         {
             ErrorMsg = "Incorrect username or password!";
         }

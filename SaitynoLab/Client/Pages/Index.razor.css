@@ -12,3 +12,8 @@ footer {
     text-align: center;
     color: white;
 }
+
+.shopLogo {
+    width: 95%;
+    max-height: 400px;
+}

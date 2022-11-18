@@ -6,6 +6,6 @@ namespace SaitynoLab.Client
     {
         // https://bsite.net/rolkaa114/
         public static string Url { get; } = "";
-        ////public static string Url { get; } = "https://saitynopsl.somee.com";
+        //public static string Url { get; } = "https://saitynopsl.somee.com";
     }
 }

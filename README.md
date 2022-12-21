@@ -559,3 +559,18 @@ DELETE https://saitynopsl.somee.com/api/orders/:orderId/furniture:furnitureId/pa
   "message": "Bad id provided or nothing found"
 }
 ## _5.Išvados_
+Laboratorinio darbo eigoje sužinota kas iš viso yra API, kur, kaip naudoti ir t.t.
+Susipažinta su įvairiais frontend‘o kūrimo būdais.
+Išbandytas bendravimas tarp backend‘o ir frontend‘o, išmokta sekti veiksmus, rasti klaidas naršyklės pagalba.
+Sužinota, kad sausainiai (Cookies) yra praeito amžiaus palikimas, ir šiais laikais reikėtų naudoti „Local Storage“.
+
+## _6.Šaltiniai, nuorodos_
+Projekto kodo repozitorijos (github) nuoroda:
+https://github.com/Appci11/SaitynoLab
+
+Projekto puslapio nuoroda:
+https://bsite.net/rolkaa114/
+
+Projekto talpinimui internete:
+https://somee.com/
+https://freeasphosting.net/

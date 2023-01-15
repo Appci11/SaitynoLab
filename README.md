@@ -9,7 +9,7 @@ user2 - user2
 
 to change:
 
-ugly routes and static class for settings (quick fixes for hosting problems)
+ugly routes and static class for settings (hosting problems, quick fix)
 
 infinite loading animation when admin is checking all users table (requirement for lab)
 

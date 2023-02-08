@@ -589,6 +589,8 @@ https://github.com/Appci11/SaitynoLab
 Projekto puslapio nuoroda:
 https://bsite.net/rolkaa114/
 
-Projekto talpinimui internete:
+Projekto talpinimui internete naudotasi šių "tinklapių" paslaugomis:
+
 https://somee.com/
+
 https://freeasphosting.net/
